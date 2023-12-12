@@ -36,7 +36,7 @@ jobs:
         make install
     - name: Run Migrations # run migrations to create table in side car db container
       run: |
-        make migrate
+        pipenv run make migrate
     - name: Run Tests
       run: |
         pipenv run python manage.py test
