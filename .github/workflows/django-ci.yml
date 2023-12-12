@@ -28,5 +28,4 @@ jobs:
         make install
     - name: Run Tests
       run: |
-        make shell
         python manage.py test
