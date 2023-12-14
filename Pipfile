@@ -9,6 +9,8 @@ wagtail = "<5.3,>=5.2"
 gunicorn = "*"
 psycopg2-binary = "*"
 psycopg = "*"
+django-compressor = "*"
+wagtail-seo = "*"
 
 [dev-packages]
 
