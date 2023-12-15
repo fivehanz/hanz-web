@@ -24,11 +24,12 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
  && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
-RUN pip install "gunicorn==20.0.4"
+RUN pip install "gunicorn==21.2.0" pipenv
 
 # Install the project requirements.
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
+COPY Pipfile /
+COPY Pipfile.lock /
+RUN python -m pipenv install
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -56,4 +57,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn hanz.wsgi:application
+CMD ["gunicorn", "--bind", ":8000", "hanz.wsgi"]  
