@@ -26,6 +26,7 @@ COMPRESS_ENABLED = True
 # Application definition
 
 INSTALLED_APPS = [
+    "blog",
     "home",
     "search",
     "wagtailseo",

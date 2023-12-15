@@ -1,5 +1,6 @@
 MAKEFLAGS += -j2
 
+install: bun-install python-install
 build: build-tailwindcss
 dev: dev-tailwindcss dev-django
 migrate: migrate-django
@@ -19,8 +20,10 @@ build-tailwindcss:
 shell:
 	python -m pipenv shell
 
-install:
+bun-install:
 	bun install
+
+python-install:
 	python -m pipenv install
 
 rtx:
