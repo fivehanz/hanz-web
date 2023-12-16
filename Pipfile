@@ -11,6 +11,7 @@ psycopg2-binary = "*"
 psycopg = "*"
 django-compressor = "*"
 wagtail-seo = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
 
 [dev-packages]
 
