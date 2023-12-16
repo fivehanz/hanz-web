@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bookworm
+FROM python:3.11-slim-buster
 
 # Add user that will be used in the container.
 RUN useradd wagtail
@@ -29,7 +29,8 @@ RUN pip install "gunicorn==21.2.0" pipenv
 # Install the project requirements.
 COPY Pipfile /
 COPY Pipfile.lock /
-RUN python -m pipenv install
+RUN python -m pipenv requirements > requirements.txt
+RUN pip install -r requirements.txt
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -57,4 +58,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD ["gunicorn", "--bind", ":8000", "hanz.wsgi"]  
+CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "hanz.wsgi"]  
