@@ -29,5 +29,5 @@ console_command = "/app/manage.py shell"
   processes = ["app"]
 
 [[statics]]
-  guest_path = "/staticfiles/"
+  guest_path = "/app/staticfiles/"
   url_prefix = "/static/"

@@ -12,10 +12,10 @@ build-docker-image:
 	docker build --tag hanz-web:${GIT_TAG} .
 
 run-docker:
-	docker run --rm -p 8000:8000 --env-file .env hanz-web:${GIT_TAG}
+	docker run --rm -p 8000:8000 --env-file .env --name hanz-web-${GIT_TAG}-dev hanz-web:${GIT_TAG}
 
 run-docker-prod:
-	docker run --rm -p 8000:8000 --env-file .env --env DJANGO_SETTINGS_MODULE=hanz.settings.production hanz-web:${GIT_TAG}
+	docker run --rm -p 8000:8000 --env-file .env --env DJANGO_SETTINGS_MODULE=hanz.settings.production --name hanz-web-${GIT_TAG}-prod hanz-web:${GIT_TAG} 
 
 dev-django:
 	python manage.py runserver
