@@ -1,10 +1,22 @@
 MAKEFLAGS += -j2
 
+GIT_TAG = ${shell git tag | tail -1}
+
 install: bun-install python-install
 build: build-tailwindcss
 dev: dev-tailwindcss dev-django
 migrate: migrate-django
-	
+
+
+build-docker-image:
+	docker build --tag hanz-web:${GIT_TAG} .
+
+run-docker:
+	docker run --rm -p 8000:8000 --env-file .env hanz-web:${GIT_TAG}
+
+run-docker-prod:
+	docker run --rm -p 8000:8000 --env-file .env --env DJANGO_SETTINGS_MODULE=hanz.settings.production hanz-web:${GIT_TAG}
+
 dev-django:
 	python manage.py runserver
 
