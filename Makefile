@@ -29,3 +29,9 @@ python-install:
 rtx:
 	# brew install libb2 openssl readline gettext
 	env PYTHON_CONFIGURE_OPTS="--enable-optimizations --disable-ipv6" env LDFLAGS="-fuse-ld=lld" ARCHFLAGS="-arch arm64" rtx i
+
+deploy:
+	fly deploy
+
+logs:
+	fly logs -a hanz-web
