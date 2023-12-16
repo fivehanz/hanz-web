@@ -41,3 +41,5 @@ wheels/
 fly.toml
 .git/
 .env
+
+node_modules/
