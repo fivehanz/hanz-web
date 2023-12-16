@@ -19,8 +19,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
 COMPRESS_ENABLED = True
 
-APP_NAME = os.environ.get("FLY_APP_NAME")
-ALLOWED_HOSTS = [f"{APP_NAME}.fly.dev"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
