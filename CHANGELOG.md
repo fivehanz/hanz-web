@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/fivehanz/hanz-web/compare/v0.3.0...v0.3.1) (2023-12-16)
+
+
+### Bug Fixes
+
+* csrf ([075797a](https://github.com/fivehanz/hanz-web/commit/075797a7dbb9589784ebec23b5a27d9a58d8a434))
+* debug and hosts in prod ([ae58cb1](https://github.com/fivehanz/hanz-web/commit/ae58cb1805a42a99dbb412051fce4b169cc6c6d9))
+
 ## [0.3.0](https://github.com/fivehanz/hanz-web/compare/v0.2.0...v0.3.0) (2023-12-16)
 
 
