@@ -17,8 +17,8 @@ run-docker:
 run-docker-prod:
 	docker run --rm -p 8000:8000 --env-file .env --env DJANGO_SETTINGS_MODULE=hanz.settings.production --name hanz-web-${GIT_TAG}-prod hanz-web:${GIT_TAG} 
 
-dev-django:
-	python manage.py runserver
+dev-django: 
+	python -m pipenv run python manage.py runserver
 
 migrate-django:
 	python manage.py makemigrations && python manage.py migrate
