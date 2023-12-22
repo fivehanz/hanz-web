@@ -30,14 +30,14 @@
     {% endif %}
 
     {% compress css %}
-    <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
       {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
       {% endblock %}
     {% endcompress %}
 
     {% compress js %}
-      <script src="{% static 'src/htmx.min.js' %}"></script>
+      <script src="{% static 'js/htmx.min.js' %}"></script>
     {% endcompress %}
   </head>
 

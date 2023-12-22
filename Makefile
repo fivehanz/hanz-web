@@ -24,10 +24,10 @@ migrate-django:
 	python manage.py makemigrations && python manage.py migrate
 
 dev-tailwindcss:
-	bunx tailwindcss -i ./static/src/input.css -o ./static/src/output.css --watch
+	bunx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch
 
 build-tailwindcss:
-	bunx tailwindcss -i ./static/src/input.css -o ./static/src/output.css --minify
+	bunx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
 
 shell:
 	python -m pipenv shell
