@@ -36,9 +36,13 @@
         {# Override this in templates to add extra stylesheets #}
       {% endblock %}
     {% endcompress %}
+
+    {% compress js %}
+      <script src="{% static 'src/htmx.min.js' %}"></script>
+    {% endcompress %}
   </head>
 
-  <body class="dark">
+  <body>
     <div class="container mx-auto mt-4">
       {% wagtailuserbar %}
   
