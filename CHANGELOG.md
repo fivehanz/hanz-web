@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/fivehanz/hanz-web/compare/v0.3.1...v0.4.0) (2023-12-22)
+
+
+### Features
+
+* add brotli compression ([8047493](https://github.com/fivehanz/hanz-web/commit/80474932804acbc828619a63824a494d9b550d6f))
+* integrate htmx ([a1ebed2](https://github.com/fivehanz/hanz-web/commit/a1ebed21b4639c1756d4edcd79d0085a3511e772))
+
 ## [0.3.1](https://github.com/fivehanz/hanz-web/compare/v0.3.0...v0.3.1) (2023-12-16)
 
 
