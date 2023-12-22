@@ -158,13 +158,24 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATIC_URL = "/static/"
+STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
+STATIC_URL = STATIC_HOST + "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+COMPRESS_STORAGE = "compressor.storage.BrotliCompressorFileStorage"  # brotli compression for static files
+
+# Boolean that decides if compression will happen.
+COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", True)
+
+# Boolean that decides if compression should be done outside of the request/response loop.
+# Must enable this to use with Whitenoise
+COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True)
+
 
 # Wagtail settings
 

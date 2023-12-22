@@ -23,13 +23,14 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libwebp-dev \
  && rm -rf /var/lib/apt/lists/*
 
-# Install the project requirements.
-COPY Pipfile /
-COPY Pipfile.lock /
-RUN pip install pipenv && python -m pipenv requirements > requirements.txt && pip install -r requirements.txt
-
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
+
+# Install the project requirements.
+COPY Pipfile .
+COPY Pipfile.lock .
+RUN pip install pipenv && python -m pipenv requirements > requirements.txt && pip install -r requirements.txt
+
 
 # Set this directory to be owned by the "wagtail" user. This Wagtail project
 # uses SQLite, the folder needs to be owned by the user that
