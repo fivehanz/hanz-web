@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "blog",
     "home",
     "search",
+    "wagtail_ai",
     "wagtailseo",
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
@@ -193,6 +194,22 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "https://web.hanz.lol"
 
-###
+# wagtail ai
 
-ADMINS = [('hanz', 'haniel56@zoho.eu')]
+WAGTAIL_AI = {
+    "BACKENDS": {
+        "default": {
+            "CLASS": "wagtail_ai.ai.llm.LLMBackend",
+            "CONFIG": {
+                "MODEL_ID": "gpt-3.5-turbo",
+                # "MODEL_ID": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+                "INIT_KWARGS": {
+                    "key": os.environ.get(
+                        "OPENAI_API_KEY",
+                        "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    )
+                },
+            },
+        }
+    }
+}
