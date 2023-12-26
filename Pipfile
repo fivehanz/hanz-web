@@ -14,6 +14,7 @@ wagtail-seo = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
 # wagtail-ai = {extras = ["llm"], editable = true, ref = "main", git = "git+https://github.com/wagtail/wagtail-ai.git"}
 wagtail-ai = {extras = ["llm"], version = "*"}
+dj-database-url = "*"
 
 [dev-packages]
 
