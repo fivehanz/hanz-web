@@ -1,1 +1,1 @@
-release: make migrate
+release: python manage.py makemigrations && python manage.py migrate
