@@ -45,9 +45,9 @@ USER wagtail
 
 # Collect static files.
 # RUN make build-tailwindcss &&
-RUN python manage.py collectstatic --noinput --clear
-RUN python manage.py compress --force
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput --clear
+# RUN python manage.py compress --force
+# RUN python manage.py collectstatic --noinput
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
