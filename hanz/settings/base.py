@@ -16,14 +16,6 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
-COMPRESS_ENABLED = True
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -157,7 +149,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "assets"),
 ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
@@ -165,9 +157,11 @@ STATICFILES_DIRS = [
 # See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 # STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# in the case of CDN url
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
+
 STATIC_URL = STATIC_HOST + "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -185,6 +179,8 @@ COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", True)
 # Must enable this to use with Whitenoise
 COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True)
 
+COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
+COMPRESS_ENABLED = True
 
 # Wagtail settings
 
