@@ -50,7 +50,7 @@ pydantic==2.5.3; python_version >= '3.7'
 pydantic-core==2.14.6; python_version >= '3.7'
 pytz==2023.3.post1
 pyyaml==6.0.1; python_version >= '3.6'
-rcssmin==1.1.1
+rcssmin==1.1.2
 regex==2023.12.25; python_version >= '3.7'
 requests==2.31.0; python_version >= '3.7'
 rjsmin==1.2.1
