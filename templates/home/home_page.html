@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %} 
+
+{% block body_class %}template-homepage{% endblock %}
+
+<!-- replace everything below with: -->
+{% block content %} 
+    <h1 class="text-3xl text-red-700 dark:text-red-400 mx-auto">
+        django + wagtail CMS + tailwind + htmx + flowbite
+    </h1>
+
+    {{ page.body|richtext }}
+{% endblock content %}

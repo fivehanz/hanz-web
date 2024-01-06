@@ -2,9 +2,9 @@ MAKEFLAGS += -j2
 
 GIT_TAG = ${shell git tag | tail -1}
 
-install: build-tailwindcss build-statics
+build: build-tailwindcss build-statics
 deps: bun-install python-install
-build: build-docker-image
+build-docker: build-docker-image
 dev: dev-tailwindcss dev-django
 migrate: migrate-django
 
