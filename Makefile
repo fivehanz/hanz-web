@@ -2,7 +2,8 @@ MAKEFLAGS += -j2
 
 GIT_TAG = ${shell git tag | tail -1}
 
-install: bun-install python-install
+install: build-tailwindcss build-statics
+deps: bun-install python-install
 build: build-docker-image
 dev: dev-tailwindcss dev-django
 migrate: migrate-django
@@ -24,16 +25,21 @@ migrate-django:
 	python manage.py makemigrations && python manage.py migrate
 
 dev-tailwindcss:
-	bunx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch --minify
+	bunx --bun tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch --minify
 
 build-tailwindcss:
-	bunx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
+	bunx --bun tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify
+
+build-statics: 
+	python -m pipenv run python manage.py collectstatic --noinput --clear
+	python -m pipenv run python manage.py compress --force
+	python -m pipenv run python manage.py collectstatic --noinput
 
 shell:
 	python -m pipenv shell
 
 bun-install:
-	bun install
+	bun --bun install
 
 python-install:
 	python -m pipenv install
