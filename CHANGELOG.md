@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/fivehanz/hanz-web/compare/v0.4.0...v0.5.0) (2024-01-06)
+
+
+### Features
+
+* optimize dfile, assets compression ([c1dde3f](https://github.com/fivehanz/hanz-web/commit/c1dde3f00f7ca9f1a5e05754060a6f77b8cbbae2))
+* refactor + flowbite ([5fdb960](https://github.com/fivehanz/hanz-web/commit/5fdb9601bcb743999408781074bd80d7811dbc22))
+
 ## [0.4.0](https://github.com/fivehanz/hanz-web/compare/v0.3.1...v0.4.0) (2023-12-22)
 
 
