@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/fivehanz/hanz-web/compare/v0.5.0...v0.6.0) (2024-01-07)
+
+
+### Features
+
+* optimize compress assets ([5f66f7c](https://github.com/fivehanz/hanz-web/commit/5f66f7c7b822ab7ffc23632b3fcf321e6567b03f))
+
+
+### Bug Fixes
+
+* assets compression to brotli ([e0a8031](https://github.com/fivehanz/hanz-web/commit/e0a80318f1bbff6df385c474c00d9065367fa06b))
+
 ## [0.5.0](https://github.com/fivehanz/hanz-web/compare/v0.4.0...v0.5.0) (2024-01-06)
 
 
