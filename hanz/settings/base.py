@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from re import DEBUG
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -177,14 +178,13 @@ CSRF_COOKIE_SECURE = True
 COMPRESS_STORAGE = "compressor.storage.BrotliCompressorFileStorage"  # brotli compression for static files
 
 # Boolean that decides if compression will happen.
-COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", True)
+COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG)
 
 # Boolean that decides if compression should be done outside of the request/response loop.
 # Must enable this to use with Whitenoise
 COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True)
 
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
-COMPRESS_ENABLED = True
 
 # Wagtail settings
 
