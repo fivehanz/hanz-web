@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/fivehanz/hanz-web/compare/v0.6.0...v0.7.0) (2024-01-09)
+
+
+### Features
+
+* deployment init w/ docker-compose ([3178c8c](https://github.com/fivehanz/hanz-web/commit/3178c8c93c8626e9b5be2b01e7716544f5b7912d))
+* nav links; footer links; optimizations ([830d66c](https://github.com/fivehanz/hanz-web/commit/830d66c3a1a970f46c7db211dd9e252df5078e72))
+
 ## [0.6.0](https://github.com/fivehanz/hanz-web/compare/v0.5.0...v0.6.0) (2024-01-07)
 
 
