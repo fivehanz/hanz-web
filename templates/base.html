@@ -34,7 +34,7 @@
     <base target="_blank">
     {% endif %}
 
-    {% compress css preload tailwind %}
+    {% compress css file tailwind %}
       <link rel="stylesheet" href="{% static 'css/output.css' %}">
     {% endcompress %}
     
@@ -44,7 +44,7 @@
 
     <!-- HTMX -->
     {% compress js %}
-      <script src="{% static 'js/htmx.min.js' %}" defer></script>
+      <script src="{% static 'js/htmx.min.js' %}"></script>
     {% endcompress %}
   </head>
 
@@ -66,8 +66,11 @@
     <!-- end footer -->
 
     <!-- Flowbite -->
-    {% compress js preload %}
+    {% compress js file %}
     <script src="{% static 'js/flowbite.min.js' %}"></script>
+    {% endcompress %}
+   
+    {% compress js inline %}
     <script>
       htmx.onLoad(function(content) {
         initFlowbite();

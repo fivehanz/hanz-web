@@ -43,3 +43,4 @@ fly.toml
 .env
 
 node_modules/
+dev_data

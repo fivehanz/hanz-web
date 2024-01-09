@@ -17,6 +17,8 @@ from re import DEBUG
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+DEBUG = os.environ.get("DEBUG", False) == 'True'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -61,7 +63,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "hanz.urls"
@@ -162,10 +163,10 @@ STATICFILES_DIRS = [
 # JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
 # See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 # STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# in the case of CDN url
+# # in the case of CDN url
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
 
 STATIC_URL = STATIC_HOST + "/static/"
@@ -176,14 +177,15 @@ MEDIA_URL = "/media/"
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-COMPRESS_STORAGE = "compressor.storage.BrotliCompressorFileStorage"  # brotli compression for static files
+COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"  # brotli compression for static files
 
 # Boolean that decides if compression will happen.
-COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG)
+COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG) == 'True'
 
 # Boolean that decides if compression should be done outside of the request/response loop.
 # Must enable this to use with Whitenoise
-COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True)
+COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True) == 'True'
+# COMPRESS_OFFLINE = True
 
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
 

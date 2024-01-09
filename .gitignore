@@ -455,3 +455,4 @@ pyrightconfig.json
 
 /static/
 .vscode/
+dev_data

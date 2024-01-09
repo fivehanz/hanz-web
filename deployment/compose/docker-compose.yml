@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: ../../
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     container_name: hanz_prod_app
     restart: unless-stopped
     ports:
@@ -15,8 +15,12 @@ services:
       - db
     environment:
       - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
-      - DJANGO_SETTINGS_MODULE=hanz.settings.production
-      - ALLOW_HOST=new.hanz.lol
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+      - DEBUG=${DEBUG}
+      - ALLOW_HOST=${ALLOW_HOST}
+      - SECRET_KEY=${SECRET_KEY}
+      - CSRF_TRUSTED_ORIGIN=${CSRF_TRUSTED_ORIGIN}
+      - COMPRESS_ENABLED=${COMPRESS_ENABLED}
 
   db:
     image: postgres:15-alpine
@@ -34,8 +38,16 @@ services:
       - PGDATA=/var/lib/postgresql/db
       # Add other PostgreSQL configurations as needed
 
+  # redis:
+  #   image: redis:stable
+  #   container_name: hanz_prod_app_redis
+  #   restart: unless-stopped
+  #   networks:
+  #     - redis
+
+
 networks:
   hanz-nw:
     driver: bridge
   db:
-
+  # redis:  
