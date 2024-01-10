@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/fivehanz/hanz-web/compare/v0.7.0...v0.8.0) (2024-01-10)
+
+
+### Features
+
+* nginx deployment init ([0cda156](https://github.com/fivehanz/hanz-web/commit/0cda156dd7d40f42bf2e9ee28559173339ebaf63))
+* optimize js w/ defer ([2bbd51c](https://github.com/fivehanz/hanz-web/commit/2bbd51c1b602bca850b94213840a8d30c3aa8a1c))
+
 ## [0.7.0](https://github.com/fivehanz/hanz-web/compare/v0.6.0...v0.7.0) (2024-01-09)
 
 
