@@ -31,9 +31,9 @@ build-tailwindcss:
 	bunx --bun tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify
 
 build-statics: 
+	python -m pipenv run python manage.py collectstatic --noinput --clear
 	python -m pipenv run python manage.py collectstatic --noinput
 	python -m pipenv run python manage.py compress --force
-	python -m pipenv run python manage.py collectstatic --noinput
 
 shell:
 	python -m pipenv shell
