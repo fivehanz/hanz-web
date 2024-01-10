@@ -10,7 +10,7 @@ migrate: migrate-django
 
 
 build-docker-image:
-	docker build --tag hanz-web:${GIT_TAG} .
+	docker build --tag hanz-web:${GIT_TAG} -f ./Dockerfile .
 
 run-docker:
 	docker run --rm -p 8000:8000 --env-file .env --name hanz-web-${GIT_TAG}-dev hanz-web:${GIT_TAG}
@@ -22,7 +22,7 @@ dev-django:
 	python -m pipenv run python manage.py runserver
 
 migrate-django:
-	python manage.py makemigrations && python manage.py migrate
+	python manage.py makemigrations && python manage.py migrate --no-input
 
 dev-tailwindcss:
 	bunx --bun tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch --minify
