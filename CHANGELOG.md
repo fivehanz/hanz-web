@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.0](https://github.com/fivehanz/hanz-web/compare/v0.8.0...v0.9.0) (2024-01-10)
+
+
+### Features
+
+* add alpinejs ([8ee1102](https://github.com/fivehanz/hanz-web/commit/8ee1102d51b5271370b4d2447d616f1c55d26e9d))
+* basic working contact form ([0dfa32d](https://github.com/fivehanz/hanz-web/commit/0dfa32d44680f6f77889c4247f9ab52b686a1b02))
+
 ## [0.8.0](https://github.com/fivehanz/hanz-web/compare/v0.7.0...v0.8.0) (2024-01-10)
 
 
