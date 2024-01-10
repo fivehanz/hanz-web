@@ -43,8 +43,8 @@
     {% endblock %}
 
     <!-- HTMX -->
-    {% compress js %}
-      <script src="{% static 'js/htmx.min.js' %}"></script>
+    {% compress js file htmx %}
+      <script defer src="{% static 'js/htmx.min.js' %}"></script>
     {% endcompress %}
   </head>
 
@@ -66,15 +66,15 @@
     <!-- end footer -->
 
     <!-- Flowbite -->
-    {% compress js file %}
-    <script src="{% static 'js/flowbite.min.js' %}"></script>
+    {% compress js file flowbite %}
+    <script defer src="{% static 'js/flowbite.min.js' %}"></script>
     {% endcompress %}
    
     {% compress js inline %}
-    <script>
-      htmx.onLoad(function(content) {
-        initFlowbite();
-      })
+    <!-- <script> -->
+    <!--   htmx.onLoad(function(content) { -->
+    <!--     initFlowbite(); -->
+    <!--   }) -->
     </script>
     {% endcompress %}
     
