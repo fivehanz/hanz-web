@@ -1,0 +1,37 @@
+{% extends "base.html" %}  <!-- Extends the base.html template -->
+
+{% load wagtailcore_tags crispy_forms_tags %}  <!-- Loads wagtailcore_tags, crispy_forms_tags -->
+
+{% block body_class %}template-formpage{% endblock %}  <!-- Defines the body_class block -->
+
+{% block content %}  <!-- Defines the content block -->
+    <!-- Renders the page title -->
+    <h1>{{ page.title }}</h1>  
+    
+    <!-- Renders the page intro as rich text -->
+    <p>{{ page.intro|richtext }}</p>  
+
+    <form class="max-w-sm mx-auto flex flex-col gap-4" action="{% pageurl page %}" method="post">        
+        <!-- Generates a CSRF token for form submission security -->
+        {% csrf_token %}  
+        
+        {{ form|crispy }} 
+
+        <!-- Renders the form fields as rich text -->
+        {% comment %} {% for field in form.visible_fields %}
+            <div class="flex flex-col">
+                {{ field.errors }}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %} {% endcomment %}
+        
+        <div class="flex items-baseline justify-evenly">
+            <button 
+                type="submit" 
+                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Send
+            </button>  
+        </div> 
+    </form>
+{% endblock content %}  <!-- Ends the content block -->

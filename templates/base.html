@@ -55,7 +55,7 @@
 
     <!-- main content -->
     <main id="main" class="px-4 mt-4 mx-auto lg:px-6">
-      <div class="format lg:format-lg dark:format-invert">
+      <div class="format lg:format-lg dark:format-invert max-w-full">
         <!--main content block-->
         {% block content %} {% endblock content %}
       </div>
@@ -69,7 +69,12 @@
     {% compress js file flowbite %}
     <script defer src="{% static 'js/flowbite.min.js' %}"></script>
     {% endcompress %}
-   
+
+    <!-- Alpinejs 3.13.3 -->
+    {% compress js file alpine %}
+    <script defer src="{% static 'js/alpine.min.js' %}"></script>
+    {% endcompress %}
+
     {% compress js inline %}
     <!-- <script> -->
     <!--   htmx.onLoad(function(content) { -->

@@ -1,20 +1,35 @@
 from django.db import models
-
-# from modelcluster.models import ClusterableModel
+from modelcluster.models import ParentalKey
 
 from wagtail.admin.panels import (
     FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
     MultiFieldPanel,
+    # PublishingPanel,
 )
-from wagtail.contrib.settings.models import (
-    BaseGenericSetting,
-    register_setting,
-)
+
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+
+# from wagtail.contrib.forms.panels import FormSubmissionsPanel
+
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
+
+# from wagtail.snippets.models import register_snippet
+
+from wagtail.fields import RichTextField
+
+# from wagtail.models import (
+#     DraftStateMixin,
+#     PreviewableMixin,
+#     RevisionMixin,
+#     TranslatableMixin,
+# )
 
 
 @register_setting
 class NavigationSettings(BaseGenericSetting):
-    """ """
+    """settings for navigation"""
 
     twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
     github_url = models.URLField(verbose_name="GitHub URL", blank=True)
@@ -29,4 +44,35 @@ class NavigationSettings(BaseGenericSetting):
             ],
             "Social settings",  # Title of the multi-field panel
         )
+    ]
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey(
+        "FormPage",
+        on_delete=models.CASCADE,
+        related_name="form_fields",
+    )
+
+
+class FormPage(AbstractEmailForm):
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("thank_you_text"),
+        InlinePanel("form_fields", label="Form fields"),
+        MultiFieldPanel(
+            [
+                FieldRowPanel(
+                    [
+                        FieldPanel("to_address", classname="col6"),
+                        FieldPanel("from_address", classname="col6"),
+                    ]
+                ),
+                FieldPanel("subject"),
+            ],
+            "Email",
+        ),
     ]

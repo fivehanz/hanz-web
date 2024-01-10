@@ -17,7 +17,7 @@ from re import DEBUG
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-DEBUG = os.environ.get("DEBUG", False) == 'True'
+DEBUG = os.environ.get("DEBUG", False) == "True"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "compressor",
+    "crispy_forms",
+    "crispy_tailwind",
+    # "wagtail.contrib.modeladmin",
 ]
 
 MIDDLEWARE = [
@@ -180,11 +183,11 @@ CSRF_COOKIE_SECURE = True
 COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"  # brotli compression for static files
 
 # Boolean that decides if compression will happen.
-COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG) == 'True'
+COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG) == "True"
 
 # Boolean that decides if compression should be done outside of the request/response loop.
 # Must enable this to use with Whitenoise
-COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True) == 'True'
+COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True) == "True"
 # COMPRESS_OFFLINE = True
 
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
@@ -206,7 +209,6 @@ WAGTAILSEARCH_BACKENDS = {
 WAGTAILADMIN_BASE_URL = "https://web.hanz.lol"
 
 # wagtail ai
-
 WAGTAIL_AI = {
     "BACKENDS": {
         "default": {
@@ -224,3 +226,7 @@ WAGTAIL_AI = {
         }
     }
 }
+
+# crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
