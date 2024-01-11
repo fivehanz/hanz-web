@@ -10,13 +10,13 @@ migrate: migrate-django
 
 prod-static-release: build-statics
 prod-start: 
-	docker compose --file ./deployment/compose/docker-compose.yml up -d
+	docker compose --env-file .env --file ./deployment/compose/docker-compose.yml up -d
 prod-rebuild: 
-	docker compose --file ./deployment/compose/docker-compose.yml up -d --build
+	docker compose --env-file .env --file ./deployment/compose/docker-compose.yml up -d --build
 prod-restart: 
-	docker compose --file ./deployment/compose/docker-compose.yml up -d --force-recreate
+	docker compose --env-file .env --file ./deployment/compose/docker-compose.yml up -d --force-recreate
 prod-stop: 
-	docker compose --file ./deployment/compose/docker-compose.yml down
+	docker compose --env-file .env --file ./deployment/compose/docker-compose.yml down
 prod-migrate: 
 	docker exec -it hanz_prod_app make migrate
 prod-nginx-link: 
