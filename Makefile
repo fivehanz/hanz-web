@@ -20,7 +20,7 @@ prod-stop:
 prod-migrate: 
 	docker exec -it hanz_prod_app make migrate
 prod-nginx-link: 
-	ln -s ./deployment/nginx/vhost.conf /etc/nginx/sites-enabled/hanz-web.conf
+	ln -s ${shell pwd}/deployment/nginx/vhost.conf /etc/nginx/sites-enabled/hanz-web.conf
 
 
 
