@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/fivehanz/hanz-web/compare/v0.9.0...v0.10.0) (2024-01-12)
+
+
+### Features
+
+* hero section on homepage ([6e2183e](https://github.com/fivehanz/hanz-web/commit/6e2183e47b6a72f50223842f7960319bd32618ea))
+
 ## [0.9.0](https://github.com/fivehanz/hanz-web/compare/v0.8.0...v0.9.0) (2024-01-10)
 
 
