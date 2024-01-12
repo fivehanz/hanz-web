@@ -7,8 +7,22 @@ deps: bun-install python-install
 build-docker: build-docker-image
 dev: dev-tailwindcss dev-django
 migrate: migrate-django
+prod: prod-release
 
-prod-static-release: build-statics
+# ! do not run as root
+prod-release:
+	sudo make prod-rebuild
+	sudo make prod-restart
+	make prod-static-release
+	sudo nginx -s reload
+
+prod-init:
+	# write scripts for init 
+
+prod-static-release:
+	python3 -m pipenv run python manage.py collectstatic --noinput --clear
+	python3 -m pipenv run python manage.py collectstatic --noinput
+	python3 -m pipenv run python manage.py compress --force
 prod-start: 
 	docker compose --env-file .env --file ./deployment/compose/docker-compose.yml up -d
 prod-rebuild: 
