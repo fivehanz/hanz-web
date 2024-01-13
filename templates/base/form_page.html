@@ -11,7 +11,7 @@
     <!-- Renders the page intro as rich text -->
     <p>{{ page.intro|richtext }}</p>  
 
-    <form class="max-w-sm mx-auto flex flex-col gap-4" action="{% pageurl page %}" method="post">        
+    <form class="max-w-md mx-auto flex flex-col gap-4" action="{% pageurl page %}" method="post">        
         <!-- Generates a CSRF token for form submission security -->
         {% csrf_token %}  
         
@@ -26,10 +26,10 @@
             </div>
         {% endfor %} {% endcomment %}
         
-        <div class="flex items-baseline justify-evenly">
+        <div class="">
             <button 
                 type="submit" 
-                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                class="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
             Send
             </button>  
         </div> 
