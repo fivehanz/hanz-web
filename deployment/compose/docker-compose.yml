@@ -13,6 +13,7 @@ services:
       - hanz-nw
     depends_on:
       - db
+      - redis
     environment:
       - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
@@ -21,6 +22,7 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - CSRF_TRUSTED_ORIGIN=${CSRF_TRUSTED_ORIGIN}
       - COMPRESS_ENABLED=${COMPRESS_ENABLED}
+      - REDIS_URL=redis://redis:6379/1
 
   db:
     image: postgres:15-alpine
@@ -38,16 +40,15 @@ services:
       - PGDATA=/var/lib/postgresql/db
       # Add other PostgreSQL configurations as needed
 
-  # redis:
-  #   image: redis:stable
-  #   container_name: hanz_prod_app_redis
-  #   restart: unless-stopped
-  #   networks:
-  #     - redis
+  redis:
+    image: redis:7-bookworm
+    container_name: hanz_prod_app_redis
+    restart: unless-stopped
+    networks:
+      - hanz-nw
 
 
 networks:
   hanz-nw:
     driver: bridge
   db:
-  # redis:  

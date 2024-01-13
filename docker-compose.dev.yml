@@ -27,7 +27,8 @@ services:
     networks:
       - hanz-nw
       - web
-    # depends_on:
+    depends_on:
+      - redis
       # - db
     environment:
       # - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
@@ -38,6 +39,7 @@ services:
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
       - CSRF_TRUSTED_ORIGIN=${CSRF_TRUSTED_ORIGIN}
       - COMPRESS_ENABLED=${COMPRESS_ENABLED}
+      - REDIS_URL=redis://redis:6379/1
 
   # db:
   #   image: postgres:15-bookworm
@@ -55,9 +57,18 @@ services:
   #     - PGDATA=/var/lib/postgresql/db
       # Add other PostgreSQL configurations as needed
 
+
+  redis:
+    image: redis:7-bookworm
+    container_name: hanz_dev_app_redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+        - hanz-nw
+        
 networks:
   hanz-nw:
     driver: bridge
   # db:
   web:
-
