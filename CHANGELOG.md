@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/fivehanz/hanz-web/compare/v0.10.0...v0.11.0) (2024-01-13)
+
+
+### Features
+
+* setup redis cache ([9bc10d7](https://github.com/fivehanz/hanz-web/commit/9bc10d78d9fbbbf933da8f0627f2318ede2871b8))
+
 ## [0.10.0](https://github.com/fivehanz/hanz-web/compare/v0.9.0...v0.10.0) (2024-01-12)
 
 
