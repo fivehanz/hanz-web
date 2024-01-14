@@ -16,7 +16,7 @@ wagtail-ai = {extras = ["llm"], version = "*"}
 dj-database-url = "*"
 django-crispy-forms = "*"
 crispy-tailwind = "*"
-django-redis = "*"
+wagtail-cache = "*"
 
 [dev-packages]
 
