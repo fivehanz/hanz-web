@@ -6,16 +6,17 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
 from wagtailseo.models import SeoMixin
+from wagtailcache.cache import WagtailCacheMixin
 
 
-class BlogIndexPage(SeoMixin, Page):
+class BlogIndexPage(WagtailCacheMixin, SeoMixin, Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("intro")]
     promote_panels = SeoMixin.seo_panels
 
 
-class BlogPage(SeoMixin, Page):
+class BlogPage(WagtailCacheMixin, SeoMixin, Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)

@@ -5,10 +5,11 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
 from wagtailseo.models import SeoMixin
+from wagtailcache.cache import WagtailCacheMixin
 
 
-class HomePage(SeoMixin, Page):
-    ### hero section fields
+class HomePage(WagtailCacheMixin, SeoMixin, Page):
+    """ hero section fields """
     hero_primary_text = models.CharField(
         blank=True,
         max_length=100,
@@ -52,10 +53,10 @@ class HomePage(SeoMixin, Page):
         help_text="Homepage Hero Secondary CTA Link",
     )
 
-    ### rest of the body content section fields
+    # rest of the body content section fields
     body = RichTextField(blank=True)
 
-    ### panel definitions
+    # panel definitions
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [

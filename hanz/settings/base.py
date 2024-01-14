@@ -10,14 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from re import DEBUG
+# from re import DEBUG
+import dj_database_url
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-DEBUG = os.environ.get("DEBUG", False) == "True"
+DEBUG: bool = os.environ.get("DEBUG", False) == "True"
+WAGTAIL_CACHE: bool = os.environ.get("WAGTAIL_CACHE", not DEBUG)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -31,6 +34,7 @@ INSTALLED_APPS = [
     "search",
     "wagtail_ai",
     "wagtailseo",
+    "wagtailcache",
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -58,6 +62,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "wagtailcache.cache.UpdateCacheMiddleware",  # wagtail cache
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -66,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "wagtailcache.cache.FetchFromCacheMiddleware",  # wagtail cache
 ]
 
 ROOT_URLCONF = "hanz.urls"
@@ -106,7 +112,6 @@ WSGI_APPLICATION = "hanz.wsgi.application"
 #     }
 # }
 
-import dj_database_url
 
 DATABASES = {
     "default": dj_database_url.config(
@@ -118,14 +123,12 @@ DATABASES = {
 
 # CACHE
 CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.environ.get("REDIS_URL", 'redis://127.0.0.1:6379/0'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
-            }
-        }
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/1"),
+        "TIMEOUT": 60 * 60 * 24 * 7,  # 1 week
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
