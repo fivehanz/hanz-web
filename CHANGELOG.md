@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/fivehanz/hanz-web/compare/v0.11.0...v0.12.0) (2024-01-14)
+
+
+### Features
+
+* wagtail-cache extension & menu ([b218469](https://github.com/fivehanz/hanz-web/commit/b2184697e67d793c1da7cf200264418892b42ff6))
+
 ## [0.11.0](https://github.com/fivehanz/hanz-web/compare/v0.10.0...v0.11.0) (2024-01-13)
 
 
