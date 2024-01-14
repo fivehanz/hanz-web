@@ -11,9 +11,11 @@ prod: prod-release
 
 # ! do not run as root
 prod-release:
+	sudo make prod-stop
 	sudo make prod-rebuild
 	sudo make prod-restart
 	make prod-static-release
+	sudo make prod-migrate
 	sudo nginx -s reload
 
 prod-init:
