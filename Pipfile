@@ -17,6 +17,7 @@ dj-database-url = "*"
 django-crispy-forms = "*"
 crispy-tailwind = "*"
 wagtail-cache = "*"
+redis = {extras = ["hiredis"], version = "*"}
 
 [dev-packages]
 
