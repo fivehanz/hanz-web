@@ -11,7 +11,6 @@ prod: prod-release
 
 # ! do not run as root
 prod-release:
-	sudo make prod-stop
 	sudo make prod-rebuild
 	sudo make prod-restart
 	make prod-static-release
@@ -22,6 +21,7 @@ prod-init:
 	# write scripts for init 
 
 prod-static-release:
+	python3 -m pipenv install
 	python3 -m pipenv run python manage.py collectstatic --noinput --clear
 	python3 -m pipenv run python manage.py collectstatic --noinput
 	python3 -m pipenv run python manage.py compress --force
