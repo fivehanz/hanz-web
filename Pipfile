@@ -18,6 +18,8 @@ django-crispy-forms = "*"
 crispy-tailwind = "*"
 wagtail-cache = "*"
 redis = {extras = ["hiredis"], version = "*"}
+django-dbbackup = "*"
+django-storages = {extras = ["boto3"], version = "*"}
 
 [dev-packages]
 

@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-# from re import DEBUG
 import dj_database_url
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,9 +20,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 DEBUG: bool = os.environ.get("DEBUG", False) == "True"
 WAGTAIL_CACHE: bool = os.environ.get("WAGTAIL_CACHE", not DEBUG)
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # Application definition
 
@@ -58,7 +54,7 @@ INSTALLED_APPS = [
     "compressor",
     "crispy_forms",
     "crispy_tailwind",
-    # "wagtail.contrib.modeladmin",
+    "dbbackup",  # django-dbbackup
 ]
 
 MIDDLEWARE = [
@@ -101,24 +97,27 @@ WSGI_APPLICATION = "hanz.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ.get("DB_NAME"),
-#         "USER": os.environ.get("DB_USER", "postgres"),
-#         "PASSWORD": os.environ.get("DB_PASSWORD"),
-#         "HOST": os.environ.get("DB_HOST", "localhost"),
-#         "PORT": os.environ.get("DB_PORT", 5432),
-#     }
-# }
-
-
 DATABASES = {
     "default": dj_database_url.config(
         default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
         conn_health_checks=True,
     )
+}
+
+# django-dbbackup settings
+DBBACKUP_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+DBBACKUP_S3_BUCKET_NAME = os.environ.get("DBBACKUP_S3_BUCKET_NAME")
+DBBACKUP_S3_ENDPOINT_URL = os.environ.get("DBBACKUP_S3_ENDPOINT_URL")
+DBBACKUP_S3_ACCESS_KEY_ID = os.environ.get("DBBACKUP_S3_ACCESS_KEY_ID")
+DBBACKUP_S3_SECRET_ACCESS_KEY = os.environ.get("DBBACKUP_S3_SECRET_ACCESS_KEY")
+
+DBBACKUP_STORAGE_OPTIONS = {
+    'access_key': DBBACKUP_S3_ACCESS_KEY_ID,
+    'secret_key': DBBACKUP_S3_SECRET_ACCESS_KEY,
+    'bucket_name': DBBACKUP_S3_BUCKET_NAME,
+    'endpoint_url': DBBACKUP_S3_ENDPOINT_URL,
+    'default_acl': 'private',
 }
 
 # CACHE
@@ -129,6 +128,7 @@ CACHES = {
         "TIMEOUT": 60 * 60 * 24 * 7,  # 1 week
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
