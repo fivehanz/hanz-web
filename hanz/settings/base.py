@@ -111,14 +111,20 @@ DBBACKUP_S3_BUCKET_NAME = os.environ.get("DBBACKUP_S3_BUCKET_NAME")
 DBBACKUP_S3_ENDPOINT_URL = os.environ.get("DBBACKUP_S3_ENDPOINT_URL")
 DBBACKUP_S3_ACCESS_KEY_ID = os.environ.get("DBBACKUP_S3_ACCESS_KEY_ID")
 DBBACKUP_S3_SECRET_ACCESS_KEY = os.environ.get("DBBACKUP_S3_SECRET_ACCESS_KEY")
+DBBACKUP_S3_REGION_NAME = os.environ.get("DBBACKUP_S3_REGION_NAME", "us-east-1")
 
 DBBACKUP_STORAGE_OPTIONS = {
     'access_key': DBBACKUP_S3_ACCESS_KEY_ID,
     'secret_key': DBBACKUP_S3_SECRET_ACCESS_KEY,
     'bucket_name': DBBACKUP_S3_BUCKET_NAME,
     'endpoint_url': DBBACKUP_S3_ENDPOINT_URL,
+    'region_name': DBBACKUP_S3_REGION_NAME,
     'default_acl': 'private',
+    'location': 'databases',
 }
+
+# AWS_S3_ADDRESSING_STYLE = "virtual"
+AWS_S3_SIGNATURE_VERSION = "s3v4"
 
 # CACHE
 CACHES = {

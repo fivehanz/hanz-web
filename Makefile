@@ -1,11 +1,11 @@
-MAKEFLAGS += -j2
+MAKEFLAGS += -j3
 
 GIT_TAG = ${shell git tag | tail -1}
 
 build: build-tailwindcss build-statics
 deps: bun-install python-install
 build-docker: build-docker-image
-dev: dev-tailwindcss dev-django
+dev: dev-tailwindcss dev-django dev-redis-start
 migrate: migrate-django
 prod: prod-release
 
@@ -39,6 +39,8 @@ prod-nginx-link:
 	ln -s ${shell pwd}/deployment/nginx/vhost.conf /etc/nginx/sites-enabled/hanz-web.conf
 
 
+dev-redis-start:
+	docker run --rm -p 6379:6379 --name hanz_dev_redis redis:7-bookworm
 
 build-docker-image:
 	docker build --tag hanz-web:${GIT_TAG} -f ./Dockerfile .

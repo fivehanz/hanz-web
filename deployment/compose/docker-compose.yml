@@ -4,11 +4,11 @@ services:
   web:
     build:
       context: ../../
-      dockerfile: Dockerfile.prod
+      dockerfile: prod.Dockerfile
     container_name: hanz_prod_app
     restart: unless-stopped
     ports:
-      - 58181:8000
+      - "58181:8000"
     networks:
       - hanz-nw
     depends_on:
@@ -23,6 +23,14 @@ services:
       - CSRF_TRUSTED_ORIGIN=${CSRF_TRUSTED_ORIGIN}
       - COMPRESS_ENABLED=${COMPRESS_ENABLED}
       - REDIS_URL=redis://redis:6379/1
+      - DBBACKUP_S3_ACCESS_KEY_ID=${DBBACKUP_S3_ACCESS_KEY_ID}
+      - DBBACKUP_S3_SECRET_KEY=${DBBACKUP_S3_SECRET_KEY}
+      - DBBACKUP_S3_BUCKET_NAME=${DBBACKUP_S3_BUCKET_NAME}
+      - DBBACKUP_S3_ENDPOINT_URL=${DBBACKUP_S3_ENDPOINT_URL}
+      - MEDIA_S3_ACCESS_KEY_ID=${MEDIA_S3_ACCESS_KEY_ID}
+      - MEDIA_S3_SECRET_KEY=${MEDIA_S3_SECRET_KEY}
+      - MEDIA_S3_BUCKET_NAME=${MEDIA_S3_BUCKET_NAME}
+      - MEDIA_S3_ENDPOINT_URL=${MEDIA_S3_ENDPOINT_URL}
 
   db:
     image: postgres:15-alpine
@@ -38,7 +46,6 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=dbpassword
       - PGDATA=/var/lib/postgresql/db
-      # Add other PostgreSQL configurations as needed
 
   redis:
     image: redis:7-bookworm
