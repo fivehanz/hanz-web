@@ -13,7 +13,7 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 
 # from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
-from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
+from wagtail.contrib.settings.models import BaseGenericSetting, BaseSiteSetting, register_setting
 
 # from wagtail.snippets.models import register_snippet
 
@@ -44,6 +44,25 @@ class NavigationSettings(BaseGenericSetting):
             ],
             "Social settings",  # Title of the multi-field panel
         )
+    ]
+
+
+@register_setting
+class GoogleTagManagerSettings(BaseSiteSetting):
+    """ google tag manager id settings """
+
+    class Meta:
+        verbose_name = "Google Tag Manager"
+
+    google_tag_manager_id = models.CharField(
+        verbose_name="Google Tag Manager ID",
+        max_length=255,
+        blank=True,
+        help_text='Begins with "GTM-"',
+    )
+
+    panels = [
+        FieldPanel("google_tag_manager_id"),
     ]
 
 
