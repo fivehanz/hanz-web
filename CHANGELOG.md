@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/fivehanz/hanz-web/compare/v0.13.0...v0.13.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* gtm js not working on prod ([2e4d82c](https://github.com/fivehanz/hanz-web/commit/2e4d82c595371ac897f0212157e06b9350b6ca9e))
+
 ## [0.13.0](https://github.com/fivehanz/hanz-web/compare/v0.12.0...v0.13.0) (2024-01-17)
 
 
