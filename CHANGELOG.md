@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/fivehanz/hanz-web/compare/v0.12.0...v0.13.0) (2024-01-17)
+
+
+### Features
+
+* google tag manager settings ([f92a06f](https://github.com/fivehanz/hanz-web/commit/f92a06f2c391d9f0079d26ed655e046b76ad92a5))
+
 ## [0.12.0](https://github.com/fivehanz/hanz-web/compare/v0.11.0...v0.12.0) (2024-01-14)
 
 
