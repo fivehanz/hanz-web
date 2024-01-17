@@ -50,8 +50,8 @@
     <!-- Google Tag Manager -->
     {% block tracking %}
       {% if settings.base.GoogleTagManagerSettings.google_tag_manager_id %}
-        {% compress js file gtm %}
-          <script defer>
+        {% compress js inline gtm %}
+          <script>
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
