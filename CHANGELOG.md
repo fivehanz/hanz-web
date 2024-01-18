@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.15.0](https://github.com/fivehanz/hanz-web/compare/v0.14.0...v0.15.0) (2024-01-18)
+
+
+### Features
+
+* auto gen sitemaps.xml ([e925e55](https://github.com/fivehanz/hanz-web/commit/e925e559ed117fe597956709e0d346664812cad2))
+
+
+### Bug Fixes
+
+* favicon ([6c15632](https://github.com/fivehanz/hanz-web/commit/6c15632356eaae2cb33085a9db5141bbabcdd306))
+
 ## [0.14.0](https://github.com/fivehanz/hanz-web/compare/v0.13.1...v0.14.0) (2024-01-18)
 
 
