@@ -40,15 +40,41 @@ services:
       - CSRF_TRUSTED_ORIGIN=${CSRF_TRUSTED_ORIGIN}
       - COMPRESS_ENABLED=${COMPRESS_ENABLED}
       - REDIS_URL=redis://redis:6379/1
+      - S3_ADDRESSING_STYLE=auto
       - DBBACKUP_S3_ACCESS_KEY_ID=${DBBACKUP_S3_ACCESS_KEY_ID}
       - DBBACKUP_S3_SECRET_KEY=${DBBACKUP_S3_SECRET_KEY}
       - DBBACKUP_S3_BUCKET_NAME=${DBBACKUP_S3_BUCKET_NAME}
       - DBBACKUP_S3_REGION_NAME=${DBBACKUP_S3_REGION_NAME}
+      - DBBACKUP_S3_ENDPOINT_URL=${DBBACKUP_S3_ENDPOINT_URL}
       - MEDIA_S3_ACCESS_KEY_ID=${MEDIA_S3_ACCESS_KEY_ID}
       - MEDIA_S3_SECRET_KEY=${MEDIA_S3_SECRET_KEY}
       - MEDIA_S3_BUCKET_NAME=${MEDIA_S3_BUCKET_NAME}
       - MEDIA_S3_ENDPOINT_URL=${MEDIA_S3_ENDPOINT_URL}
       - MEDIA_S3_REGION_NAME=${MEDIA_S3_REGION_NAME}
+
+  redis:
+    image: redis:7-bookworm
+    container_name: hanz_dev_app_redis
+    restart: unless-stopped
+    networks:
+        - hanz-nw
+
+  minio:
+    image: quay.io/minio/minio
+    container_name: hanz_dev_app_minio
+    restart: unless-stopped
+    networks:
+        - hanz-nw
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./dev_data/minio/data:/data
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    command: server /data --console-address ":9001"
+
 
 
   # db:
@@ -68,12 +94,6 @@ services:
       # Add other PostgreSQL configurations as needed
 
 
-  redis:
-    image: redis:7-bookworm
-    container_name: hanz_dev_app_redis
-    restart: unless-stopped
-    networks:
-        - hanz-nw
 
 networks:
   hanz-nw:

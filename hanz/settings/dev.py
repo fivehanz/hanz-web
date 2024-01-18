@@ -14,6 +14,7 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+DBBACKUP_STORAGE_OPTIONS['endpoint_url'] = os.environ.get("DBBACKUP_S3_ENDPOINT_URL")
 
 try:
     from .local import *
