@@ -21,7 +21,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: prod.Dockerfile
+      dockerfile: dev.Dockerfile
     container_name: hanz_app_dev
     restart: unless-stopped
     networks:

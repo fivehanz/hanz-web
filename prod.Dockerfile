@@ -7,7 +7,6 @@ EXPOSE 8000
 # 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
 #    command.
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
     PORT=8000
 
 # Install system packages required by Wagtail and Django.
@@ -21,6 +20,9 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
 WORKDIR /app
 RUN chown wagtail:wagtail /app
 COPY --chown=wagtail:wagtail . .
+
+# Install server
+RUN pip --no-cache-dir install gunicorn==21.2.0
 
 # Install the project requirements.
 RUN pip --no-cache-dir install pipenv && python -m pipenv requirements > requirements.txt && pip --no-cache-dir install -r requirements.txt

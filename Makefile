@@ -43,7 +43,7 @@ dev-redis-start:
 	docker run --rm -p 6379:6379 --name hanz_dev_redis redis:7-bookworm
 
 build-docker-image:
-	docker build --tag hanz-web:${GIT_TAG} -f ./Dockerfile .
+	docker build --tag hanz-web:${GIT_TAG} -f ./dev.Dockerfile .
 
 run-docker:
 	docker run --rm -p 8000:8000 --env-file .env --name hanz-web-${GIT_TAG}-dev hanz-web:${GIT_TAG}
