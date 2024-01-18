@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.14.0](https://github.com/fivehanz/hanz-web/compare/v0.13.1...v0.14.0) (2024-01-18)
+
+
+### Features
+
+* dev env with minio ([4fac4c6](https://github.com/fivehanz/hanz-web/commit/4fac4c6a8101a8b55039134b1edfa3b6c25449df))
+
+
+### Bug Fixes
+
+* s3 dbbackup works ([174cad7](https://github.com/fivehanz/hanz-web/commit/174cad7c5c44d4131315ca4b2ff86493a4faf88e))
+
 ## [0.13.1](https://github.com/fivehanz/hanz-web/compare/v0.13.0...v0.13.1) (2024-01-17)
 
 
