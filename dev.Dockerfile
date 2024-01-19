@@ -29,6 +29,10 @@ RUN pip --no-cache-dir install granian
 # Install the project requirements.
 RUN pip --no-cache-dir install pipenv && python -m pipenv requirements > requirements.txt && pip --no-cache-dir install -r requirements.txt
 
+# Install LLM anyScale endpoints
+ENV LLM_USER_PATH=/app/.llm
+RUN python -m llm install llm-anyscale-endpoints
+
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
@@ -37,6 +41,6 @@ CMD exec granian \
     --interface wsgi hanz.wsgi:application \
     --host 0.0.0.0 \
     --port $PORT \
-    --workers 3 \
+    --workers 2 \
     --http auto \
     --threading-mode runtime

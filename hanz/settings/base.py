@@ -230,11 +230,11 @@ WAGTAIL_AI = {
         "default": {
             "CLASS": "wagtail_ai.ai.llm.LLMBackend",
             "CONFIG": {
-                "MODEL_ID": "gpt-3.5-turbo",
-                # "MODEL_ID": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+                "MODEL_ID": "mistralai/Mistral-7B-Instruct-v0.1",
+                "TOKEN_LIMIT": 4096,
                 "INIT_KWARGS": {
                     "key": os.environ.get(
-                        "OPENAI_API_KEY",
+                        "LLM_ANYSCALE_ENDPOINTS_KEY",
                         "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                     )
                 },
