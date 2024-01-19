@@ -26,6 +26,7 @@ WAGTAIL_CACHE: bool = os.environ.get("WAGTAIL_CACHE", not DEBUG)
 INSTALLED_APPS = [
     "base",
     "blog",
+    "project",
     "home",
     "search",
     "wagtail_ai",
