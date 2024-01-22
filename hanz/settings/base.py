@@ -112,12 +112,12 @@ DBBACKUP_STORAGE = "storages.backends.s3.S3Storage"
 # DBBACKUP_S3_ENDPOINT_URL = os.environ.get("DBBACKUP_S3_ENDPOINT_URL")
 
 DBBACKUP_STORAGE_OPTIONS = {
-    'access_key': os.environ.get("DBBACKUP_S3_ACCESS_KEY_ID"),
-    'secret_key': os.environ.get("DBBACKUP_S3_SECRET_KEY"),
-    'bucket_name': os.environ.get("DBBACKUP_S3_BUCKET_NAME"),
+    "access_key": os.environ.get("DBBACKUP_S3_ACCESS_KEY_ID"),
+    "secret_key": os.environ.get("DBBACKUP_S3_SECRET_KEY"),
+    "bucket_name": os.environ.get("DBBACKUP_S3_BUCKET_NAME"),
     # 'endpoint_url': DBBACKUP_S3_ENDPOINT_URL,
-    'region_name': os.environ.get("DBBACKUP_S3_REGION_NAME", "us-east-1"),
-    'default_acl': 'private',
+    "region_name": os.environ.get("DBBACKUP_S3_REGION_NAME", "us-east-1"),
+    "default_acl": "private",
 }
 
 AWS_S3_ADDRESSING_STYLE = os.environ.get("S3_ADDRESSING_STYLE", "virtual")
@@ -132,6 +132,11 @@ CACHES = {
     }
 }
 
+# Email
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+ANYMAIL = {
+    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
