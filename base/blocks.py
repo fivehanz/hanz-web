@@ -47,7 +47,3 @@ class BaseStreamBlock(StreamBlock):
         icon="media",
         required=False,
     )
-
-    class Meta:
-        icon = "edit"
-        template = "base/blocks/stream.html"

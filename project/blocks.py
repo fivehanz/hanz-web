@@ -10,26 +10,33 @@ from wagtail.images.blocks import ImageChooserBlock
 from base.blocks import BaseStreamBlock
 
 
-class CardBlock(StructBlock):
-    heading = CharBlock()
-    text = RichTextBlock(features=["bold", "italic", "link"])
-    image = ImageChooserBlock(required=False)
-
-    class Meta:
-        icon = "form"
-        template = "portfolio/blocks/card.html"
-
-
-class FeaturedPostsBlock(StructBlock):
+class PostsBlock(StructBlock):
     heading = CharBlock()
     text = RichTextBlock(features=["bold", "italic", "link"], required=False)
-    posts = ListBlock(PageChooserBlock(page_type="blog.BlogPage"))
+    links = ListBlock(
+        StructBlock(
+            [
+                ("name", CharBlock(max_length=100)),
+                ("url", CharBlock()),
+            ]
+        )
+    )
+    page = PageChooserBlock(page_type=["blog.BlogPage"], required=False)
 
     class Meta:
         icon = "folder-open-inverse"
-        template = "portfolio/blocks/featured_posts.html"
+
+
+class ProjectsBlock(StructBlock):
+    heading = CharBlock()
+    text = RichTextBlock(features=["bold", "italic", "link"], required=False)
+    image = ImageChooserBlock(required=False)
+    featured = ListBlock(PostsBlock(required=True))
+
+    class Meta:
+        icon = "form"
+        template = "project/blocks/projects.html"
 
 
 class ProjectStreamBlock(BaseStreamBlock):
-    card = CardBlock(group="Sections")
-    featured_posts = FeaturedPostsBlock(group="Sections")
+    projects = ProjectsBlock(group="Sections")
