@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.16.0](https://github.com/fivehanz/hanz-web/compare/v0.15.0...v0.16.0) (2024-01-22)
+
+
+### Features
+
+* add email backend in prod ([c906099](https://github.com/fivehanz/hanz-web/commit/c9060990c205d873ced3770bff583d15765b8016))
+* projects page ([3fed025](https://github.com/fivehanz/hanz-web/commit/3fed0251e7572600f2b3bed1a0499dfe16c4d515))
+* projects pages ([42d50d2](https://github.com/fivehanz/hanz-web/commit/42d50d2862221f782ca93dc905309a6713ea4cd2))
+* working wagtail-ai ([a53876c](https://github.com/fivehanz/hanz-web/commit/a53876c2247bb9bf1349a4327a79ab990d298867))
+
 ## [0.15.0](https://github.com/fivehanz/hanz-web/compare/v0.14.0...v0.15.0) (2024-01-18)
 
 
