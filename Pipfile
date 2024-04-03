@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 django = "<5.1,>=4.2"
-wagtail = "<5.3,>=5.2"
+wagtail = "<6.3,>=6.0"
 psycopg2-binary = "*"
 django-compressor = "*"
 wagtail-seo = "*"
