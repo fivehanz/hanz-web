@@ -1,11 +1,10 @@
-MAKEFLAGS += -j3
-
+MAKEFLAGS += -j4
 GIT_TAG = ${shell git tag | tail -1}
 
 build: build-tailwindcss build-statics
 deps: bun-install python-install
 build-docker: build-docker-image
-dev: dev-tailwindcss dev-django dev-redis-start
+dev: dev-tailwindcss dev-django dev-redis-start dev-minio-start
 migrate: migrate-django
 prod: prod-release
 
@@ -41,6 +40,13 @@ prod-nginx-link:
 
 dev-redis-start:
 	docker run --rm -p 6379:6379 --name hanz_dev_redis redis:7-bookworm
+
+dev-minio-start:
+	docker run --rm -p 9000:9000 -p 9001:9001 \
+		--env MINIO_ROOT_USER=root --env MINIO_ROOT_PASSWORD=password \
+		--volume ./dev_data/minio/data:/data \
+		--name hanz_dev_minio \
+		quay.io/minio/minio server /data --console-address ":9001"
 
 build-docker-image:
 	docker build --tag hanz-web:${GIT_TAG} -f ./dev.Dockerfile .

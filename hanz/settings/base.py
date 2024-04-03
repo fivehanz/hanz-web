@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import dj_database_url
+from django.conf.global_settings import STORAGES
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     "dbbackup",  # django-dbbackup
+    "storages",  # django-storages
 ]
 
 MIDDLEWARE = [
@@ -95,6 +97,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "hanz.wsgi.application"
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -161,13 +165,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -193,19 +193,34 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # # in the case of CDN url
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
-
 STATIC_URL = STATIC_HOST + "/static/"
+
+
+# Storage Backends
+STORAGES["default"] = {
+    "BACKEND": "storages.backends.s3.S3Storage",
+    "OPTIONS": {
+        "access_key": os.environ.get("MEDIA_S3_ACCESS_KEY_ID"),
+        "secret_key": os.environ.get("MEDIA_S3_SECRET_KEY"),
+        "bucket_name": os.environ.get("MEDIA_S3_BUCKET_NAME"),
+        "region_name": os.environ.get("MEDIA_S3_REGION_NAME", "us-east-1"),
+        "endpoint_url": os.environ.get("MEDIA_S3_ENDPOINT_URL"),
+        "use_ssl": os.environ.get("MEDIA_S3_USE_SSL", True) == "True",
+        "addressing_style": "path",
+        "default_acl": "public-read",
+    },
+}
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"  # brotli compression for static files
-
+# Static Files
 # Boolean that decides if compression will happen.
 COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG) == "True"
+COMPRESS_STORAGE = (
+    "compressor.storage.GzipCompressorFileStorage"  # gzip compression for static files
+)
 
 # Boolean that decides if compression should be done outside of the request/response loop.
 # Must enable this to use with Whitenoise
@@ -215,7 +230,6 @@ COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True) == "True"
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
 
 # Wagtail settings
-
 WAGTAIL_SITE_NAME = "hanz"
 
 # Search
