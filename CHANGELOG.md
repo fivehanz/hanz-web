@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.17.0](https://github.com/fivehanz/hanz-web/compare/v0.16.0...v0.17.0) (2024-04-03)
+
+
+### Features
+
+* s3 default base storage ([1944e01](https://github.com/fivehanz/hanz-web/commit/1944e016d2359cc8643793bed09cb8931844eb65))
+* update django version to 5.0.3 ([6f0258f](https://github.com/fivehanz/hanz-web/commit/6f0258f092fb573faaac60f4be680e8942a13c6a))
+* update to wagtail 6 ([76a0797](https://github.com/fivehanz/hanz-web/commit/76a079726b1cd250d741ad2ad6a21691c612286d))
+
 ## [0.16.0](https://github.com/fivehanz/hanz-web/compare/v0.15.0...v0.16.0) (2024-01-22)
 
 
