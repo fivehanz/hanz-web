@@ -3,11 +3,12 @@ GIT_TAG = ${shell git tag | tail -1}
 
 build: build-tailwindcss build-statics
 deps: bun-install python-install
-build-docker: build-docker-image
+# build-docker: build-docker-image
 dev: dev-tailwindcss dev-django dev-redis-start dev-minio-start
 migrate: migrate-django
 prod: prod-release
 
+################################################# PROD ###
 # ! do not run as root
 prod-release:
 	sudo make prod-rebuild
@@ -37,6 +38,10 @@ prod-migrate:
 prod-nginx-link: 
 	ln -s ${shell pwd}/deployment/nginx/vhost.conf /etc/nginx/sites-enabled/hanz-web.conf
 
+############################################### end PROD ###
+
+
+#### DEV ####
 
 dev-redis-start:
 	docker run --rm -p 6379:6379 --name hanz_dev_redis redis:7-bookworm
@@ -48,23 +53,26 @@ dev-minio-start:
 		--name hanz_dev_minio \
 		quay.io/minio/minio server /data --console-address ":9001"
 
-build-docker-image:
-	docker build --tag hanz-web:${GIT_TAG} -f ./dev.Dockerfile .
-
-run-docker:
-	docker run --rm -p 8000:8000 --env-file .env --name hanz-web-${GIT_TAG}-dev hanz-web:${GIT_TAG}
-
-run-docker-prod:
-	docker run --rm -p 8000:8000 --env-file .env --env DJANGO_SETTINGS_MODULE=hanz.settings.production --name hanz-web-${GIT_TAG}-prod hanz-web:${GIT_TAG} 
-
 dev-django: 
-	python -m pipenv run python manage.py runserver
-
-migrate-django:
-	python manage.py makemigrations && python manage.py migrate --no-input
+	pipenv run python manage.py runserver
 
 dev-tailwindcss:
 	bunx --bun tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch --minify
+
+#### end DEV ####
+
+
+# build-docker-image:
+# 	docker build --tag hanz-web:${GIT_TAG} -f ./dev.Dockerfile .
+#
+# run-docker:
+# 	docker run --rm -p 8000:8000 --env-file .env --name hanz-web-${GIT_TAG}-dev hanz-web:${GIT_TAG}
+#
+# run-docker-prod:
+# 	docker run --rm -p 8000:8000 --env-file .env --env DJANGO_SETTINGS_MODULE=hanz.settings.production --name hanz-web-${GIT_TAG}-prod hanz-web:${GIT_TAG} 
+#
+migrate-django:
+	python manage.py makemigrations && python manage.py migrate --no-input
 
 build-tailwindcss:
 	bunx --bun tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify
@@ -83,12 +91,3 @@ bun-install:
 python-install:
 	python -m pipenv install
 
-rtx:
-	# brew install libb2 openssl readline gettext
-	env PYTHON_CONFIGURE_OPTS="--enable-optimizations --disable-ipv6" env LDFLAGS="-fuse-ld=lld" ARCHFLAGS="-arch arm64" rtx i
-
-# deploy:
-# 	fly deploy
-#
-# logs:
-# 	fly logs -a hanz-web
