@@ -1,3 +1,3 @@
 [tools]
 python = "3.11"
-bun = "latest"
+bun = "1.1.1"
