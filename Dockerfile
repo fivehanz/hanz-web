@@ -1,4 +1,7 @@
-FROM python:3.11-slim-bookworm as python-base
+ARG UID=1000
+ARG GID=1000
+
+FROM python:3.11-slim-bookworm AS python-base
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -14,7 +17,7 @@ ENV PYTHONUNBUFFERED=1 \
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 ############################################################
-FROM python-base as builder-base
+FROM python-base AS builder-base
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y --quiet \
@@ -33,11 +36,12 @@ COPY poetry.lock pyproject.toml ./
 RUN poetry install --no-dev && poetry add granian==1.5.2 && poetry cache clear . --all
 
 ############################################################
-FROM python-base as production
-RUN useradd wagtail
+FROM python-base AS production
+
+RUN groupadd -g $GID wagtail && \
+    useradd -m -u $UID -g $GID wagtail
 
 WORKDIR $PYSETUP_PATH
-
 COPY --from=builder-base $POETRY_HOME $POETRY_HOME
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 
@@ -49,7 +53,8 @@ COPY . /app/src/
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8000
 EXPOSE $PORT
-ENV PYTHONPATH=/app/src:$PYTHONPATH
+
+# ENV PYTHONPATH=/app/src:$PYTHONPATH
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh && chown wagtail:wagtail /entrypoint.sh
