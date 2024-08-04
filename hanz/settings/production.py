@@ -2,16 +2,17 @@ from .base import *
 import os
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
-APP_NAME = os.environ.get("FLY_APP_NAME")
 
-ALLOWED_HOSTS = [
-    # f"{APP_NAME}.fly.dev",
-    os.environ.get("ALLOW_HOST")
-]
+WAGTAILFRONTENDCACHE = {
+    "cloudflare": {
+        "BACKEND": "wagtail.contrib.frontend_cache.backends.CloudflareBackend",
+        "BEARER_TOKEN": os.environ.get("CLOUDFLARE_BEARER_TOKEN"),
+        "ZONEID": os.environ.get("CLOUDFLARE_ZONEID"),
+    },
+}
 
-CSRF_TRUSTED_ORIGINS = [
-    os.environ.get("CSRF_TRUSTED_ORIGIN", f"https://{os.environ.get('ALLOW_HOST')}")
-]
+ALLOWED_HOSTS = os.environ.get("ALLOW_HOSTS").split(",")
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
 
 try:
     from .local import *

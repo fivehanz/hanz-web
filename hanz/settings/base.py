@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import dj_database_url
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.frontend_cache",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     "dbbackup",  # django-dbbackup
     "storages",  # django-storages
+    # TODO: wagtail-storages for documents does not work at the moment
+    # "wagtail_storages.apps.WagtailStoragesConfig",
 ]
 
 MIDDLEWARE = [
@@ -163,7 +165,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
@@ -173,25 +174,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "compressor.finders.CompressorFinder",
 ]
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "assets"),
 ]
-
-# ManifestStaticFilesStorage is recommended in production, to prevent outdated
-# JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
-# See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
-# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-# # in the case of CDN url
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
 STATIC_URL = STATIC_HOST + "/static/"
 
@@ -207,24 +198,25 @@ STORAGES["default"] = {
         "endpoint_url": os.environ.get("MEDIA_S3_ENDPOINT_URL"),
         "use_ssl": os.environ.get("MEDIA_S3_USE_SSL", True) == "True",
         "addressing_style": "path",
-        "default_acl": "public-read",
+        "default_acl": "private",
     },
 }
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+WAGTAIL_STORAGES_DOCUMENT_HOOK_ORDER = 900
+
 # Static Files
 # Boolean that decides if compression will happen.
-COMPRESS_ENABLED = os.environ.get("COMPRESS_ENABLED", not DEBUG) == "True"
+COMPRESS_ENABLED: bool = os.environ.get("COMPRESS_ENABLED", not DEBUG) == "True"
 COMPRESS_STORAGE = (
     "compressor.storage.GzipCompressorFileStorage"  # gzip compression for static files
 )
 
 # Boolean that decides if compression should be done outside of the request/response loop.
 # Must enable this to use with Whitenoise
-COMPRESS_OFFLINE = os.environ.get("COMPRESS_OFFLINE", True) == "True"
+COMPRESS_OFFLINE: bool = os.environ.get("COMPRESS_OFFLINE", True) == "True"
 # COMPRESS_OFFLINE = True
 
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
@@ -242,7 +234,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "https://web.hanz.lol"
+WAGTAILADMIN_BASE_URL = "https://hanz.jsmx.org"
 
 # wagtail ai
 WAGTAIL_AI = {
