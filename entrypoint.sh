@@ -11,7 +11,6 @@ collect_static() {
     echo "-----------------    collecting static files    -----------------"
     python manage.py collectstatic --noinput --clear
     python manage.py collectstatic --noinput
-    python manage.py compress --force
 }
 
 compress_static() {

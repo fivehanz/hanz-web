@@ -43,9 +43,6 @@ services:
       - .env
     volumes:
       - ../../static:/app/src/static/
-    command: "python manage.py collectstatic --noinput --clear && \
-              python manage.py collectstatic --noinput && \
-              python manage.py compress --force"
 
   db:
     image: postgres:15-alpine
