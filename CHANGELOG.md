@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.18.0](https://github.com/fivehanz/hanz-web/compare/v0.17.0...v0.18.0) (2024-08-04)
+
+
+### Features
+
+* automatic static collect ([42d8a9a](https://github.com/fivehanz/hanz-web/commit/42d8a9a0983587515a1aa7d5c74da451b2c85750))
+
+
+### Bug Fixes
+
+* **entrypoint:** conditionals ([37b37ce](https://github.com/fivehanz/hanz-web/commit/37b37ceb33a9becd558648335089c2eaa43861aa))
+* static build release ([1e0ad8e](https://github.com/fivehanz/hanz-web/commit/1e0ad8e7a00bb66eb645c4e4ea1cc66c40edc09f))
+* static files ([c07da5e](https://github.com/fivehanz/hanz-web/commit/c07da5e79ce03ae9880313a1c543664d6f2f5ff9))
+* **statics:** multiple commands ([0211c6d](https://github.com/fivehanz/hanz-web/commit/0211c6d6f31098777233d8b3b6413df138fbe870))
+
 ## [0.17.0](https://github.com/fivehanz/hanz-web/compare/v0.16.0...v0.17.0) (2024-08-04)
 
 
