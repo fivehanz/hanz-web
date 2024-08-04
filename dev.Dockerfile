@@ -1,46 +1,64 @@
-FROM python:3.11-slim-bookworm
-RUN useradd wagtail
-EXPOSE 8000
+FROM python:3.11-slim-bookworm as python-base
 
-# Set environment variables.
-# 1. Force Python stdout and stderr streams to be unbuffered.
-# 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
-#    command.
 ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    PYSETUP_PATH="/opt/pysetup" \
+    VENV_PATH="/opt/pysetup/.venv"
 
-EXPOSE ${PORT}
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
-# Install system packages required by Wagtail and Django.
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+############################################################
+
+FROM python-base as builder-base
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y --quiet \
+    curl \
     build-essential \
     postgresql-client \
     libpq-dev \
- && rm -rf /var/lib/apt/lists/* && apt-get clean
+  && rm -rf /var/lib/apt/lists/* && apt-get clean
 
-# Use /app folder as a directory where the source code is stored.
-WORKDIR /app
-RUN chown wagtail:wagtail /app
-COPY --chown=wagtail:wagtail . .
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
-# Install server
-RUN pip --no-cache-dir install granian
+WORKDIR $PYSETUP_PATH
+COPY poetry.lock pyproject.toml ./
 
-# Install the project requirements.
-RUN pip --no-cache-dir install pipenv && python -m pipenv requirements > requirements.txt && pip --no-cache-dir install -r requirements.txt
+RUN poetry install --no-dev && poetry add granian[reload] && poetry cache clear . --all
 
-# Install LLM anyScale endpoints
-ENV LLM_USER_PATH=/app/.llm
-RUN python -m llm install llm-anyscale-endpoints
+############################################################
 
-# Use user "wagtail" to run the build commands below and the server itself.
-USER wagtail
+FROM python-base as development
 
-# server start
-CMD exec granian \
-    --interface wsgi hanz.wsgi:application \
-    --host 0.0.0.0 \
-    --port $PORT \
-    --workers 2 \
-    --http auto \
-    --threading-mode runtime
+WORKDIR $PYSETUP_PATH
+
+COPY --from=builder-base $POETRY_HOME $POETRY_HOME
+COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
+
+WORKDIR /app/src
+
+# Copy the source code into the container
+# COPY . /app/
+
+ENV PYTHONUNBUFFERED=1
+EXPOSE 8000
+ENV PYTHONPATH=/app/src:$PYTHONPATH
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD granian \
+  --interface wsgi hanz.wsgi:application \
+  --host 0.0.0.0 \
+  --port 8000 \
+  --workers 2 \
+  --threads 2 \
+  --reload
