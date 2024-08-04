@@ -18,7 +18,7 @@ compress_static() {
     python manage.py compress --force
 }
 
-if [ "${COLLECT_STATIC:-false}" ]; then
+if [ "${COLLECT_STATIC:-false}" = true ]; then
   collect_static
   compress_static
 else
