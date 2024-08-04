@@ -44,3 +44,4 @@ fly.toml
 
 node_modules/
 dev_data
+.venv
