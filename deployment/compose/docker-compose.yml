@@ -1,10 +1,8 @@
-version: '3.8'
-
 services:
   web:
     build:
       context: ../../
-      dockerfile: prod.Dockerfile
+      dockerfile: Dockerfile
     container_name: hanz_prod_app
     restart: unless-stopped
     ports:
@@ -16,25 +14,11 @@ services:
       - redis
     environment:
       - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
-      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-      - DEBUG=${DEBUG}
-      - ALLOW_HOST=${ALLOW_HOST}
-      - SECRET_KEY=${SECRET_KEY}
-      - CSRF_TRUSTED_ORIGIN=${CSRF_TRUSTED_ORIGIN}
-      - COMPRESS_ENABLED=${COMPRESS_ENABLED}
-      - LLM_ANYSCALE_ENDPOINTS_KEY=${LLM_ANYSCALE_ENDPOINTS_KEY}
       - REDIS_URL=redis://redis:6379/1
-      - DBBACKUP_S3_ACCESS_KEY_ID=${DBBACKUP_S3_ACCESS_KEY_ID}
-      - DBBACKUP_S3_SECRET_KEY=${DBBACKUP_S3_SECRET_KEY}
-      - DBBACKUP_S3_BUCKET_NAME=${DBBACKUP_S3_BUCKET_NAME}
-      - DBBACKUP_S3_ENDPOINT_URL=${DBBACKUP_S3_ENDPOINT_URL}
-      - DBBACKUP_S3_REGION_NAME=${DBBACKUP_S3_REGION_NAME}
-      - MEDIA_S3_ACCESS_KEY_ID=${MEDIA_S3_ACCESS_KEY_ID}
-      - MEDIA_S3_SECRET_KEY=${MEDIA_S3_SECRET_KEY}
-      - MEDIA_S3_BUCKET_NAME=${MEDIA_S3_BUCKET_NAME}
-      - MEDIA_S3_ENDPOINT_URL=${MEDIA_S3_ENDPOINT_URL}
-      - MEDIA_S3_REGION_NAME=${MEDIA_S3_REGION_NAME}
-      - RESEND_API_KEY=${RESEND_API_KEY}
+    env_file:
+      - .env
+    command: granian --interface wsgi hanz.wsgi:application --host 0.0.0.0 --port 8000 \
+      --workers 2 --threads 2 --log-level info
 
   db:
     image: postgres:15-alpine
@@ -52,7 +36,7 @@ services:
       - PGDATA=/var/lib/postgresql/db
 
   redis:
-    image: redis:7-bookworm
+    image: redis:7-alpine
     container_name: hanz_prod_app_redis
     restart: unless-stopped
     networks:
