@@ -13,8 +13,8 @@ prod: prod-release
 prod-release:
 	sudo make prod-rebuild
 	sudo make prod-restart
-	sudo make prod-migrate
-	make prod-static-release
+	# sudo make prod-migrate
+	# make prod-static-release
 	sudo nginx -s reload
 
 prod-init:
