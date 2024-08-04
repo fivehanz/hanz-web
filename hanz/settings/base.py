@@ -216,7 +216,7 @@ COMPRESS_STORAGE = (
 
 # Boolean that decides if compression should be done outside of the request/response loop.
 # Must enable this to use with Whitenoise
-COMPRESS_OFFLINE: bool = os.environ.get("COMPRESS_OFFLINE", True) == "True"
+COMPRESS_OFFLINE: bool = os.environ.get("COMPRESS_OFFLINE", False) == "True"
 # COMPRESS_OFFLINE = True
 
 COMPRESS_ROOT = os.path.join(BASE_DIR, "static")

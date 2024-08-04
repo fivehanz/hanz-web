@@ -41,7 +41,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./static:/app/src/static/
+      - ../../static:/app/src/static/
     command: "python manage.py collectstatic --noinput --clear && \
               python manage.py collectstatic --noinput && \
               python manage.py compress --force"
