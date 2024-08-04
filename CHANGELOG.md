@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.17.0](https://github.com/fivehanz/hanz-web/compare/v0.16.0...v0.17.0) (2024-08-04)
+
+
+### Features
+
+* move CI to docker based ([40bbbab](https://github.com/fivehanz/hanz-web/commit/40bbbab7f8393365d80ebdda77d585c6f8c0e544))
+* move to granian == 1.5.2 ([242078c](https://github.com/fivehanz/hanz-web/commit/242078ca19f7e7efff9ec9b2150124b820c0a0b1))
+* move to poetry from pipenv ([6ebb76b](https://github.com/fivehanz/hanz-web/commit/6ebb76ba923a0c15b645d21f7e14963159f0f4ad))
+* s3 default base storage ([1944e01](https://github.com/fivehanz/hanz-web/commit/1944e016d2359cc8643793bed09cb8931844eb65))
+* s3 storage for media ([ca3eeb2](https://github.com/fivehanz/hanz-web/commit/ca3eeb2d2df1f70405b4611bd5a03f37cead6395))
+* update bun to 1.1.21 ([f3c2b0c](https://github.com/fivehanz/hanz-web/commit/f3c2b0c4b9e714cf66a3c28ea86e9303e5915d22))
+* update django version to 5.0.3 ([6f0258f](https://github.com/fivehanz/hanz-web/commit/6f0258f092fb573faaac60f4be680e8942a13c6a))
+* update to wagtail 6 ([76a0797](https://github.com/fivehanz/hanz-web/commit/76a079726b1cd250d741ad2ad6a21691c612286d))
+* upgrade nginx config ([a688491](https://github.com/fivehanz/hanz-web/commit/a6884915838780bc5097085fb15e77b3230be002))
+
+
+### Bug Fixes
+
+* docker dev environment ([0ce2490](https://github.com/fivehanz/hanz-web/commit/0ce2490a48128c8dc8189866c817a85bb006bf32))
+
 ## [0.16.0](https://github.com/fivehanz/hanz-web/compare/v0.15.0...v0.16.0) (2024-01-22)
 
 
