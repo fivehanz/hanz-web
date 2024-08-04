@@ -7,6 +7,26 @@ run_migrations() {
     python manage.py migrate
 }
 
+collect_static() {
+    echo "-----------------    collecting static files    -----------------"
+    python manage.py collectstatic --noinput --clear
+    python manage.py collectstatic --noinput
+    python manage.py compress --force
+}
+
+compress_static() {
+    echo "-----------------   compressing static files   -----------------"
+    python manage.py compress --force
+}
+
+if [ "${COLLECT_STATIC:-false}" ]; then
+  collect_static
+  compress_static
+else
+  echo "------------------ skipping collect static files -----------------"
+fi
+
+
 if [ "${RUN_MIGRATION:-false}" = true ]; then
     run_migrations
 else
