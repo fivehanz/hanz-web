@@ -1,6 +1,3 @@
-ARG UID=1000
-ARG GID=1000
-
 FROM python:3.11-slim-bookworm AS python-base
 
 ENV PYTHONUNBUFFERED=1 \
@@ -37,6 +34,9 @@ RUN poetry install --no-dev && poetry add granian==1.5.2 && poetry cache clear .
 
 ############################################################
 FROM python-base AS production
+
+ENV GID=1000
+ENV UID=1000
 
 RUN groupadd -g $GID wagtail && \
     useradd -m -u $UID -g $GID wagtail
