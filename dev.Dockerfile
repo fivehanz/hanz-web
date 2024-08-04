@@ -23,6 +23,7 @@ RUN apt-get update \
     build-essential \
     postgresql-client \
     libpq-dev \
+    inotify-tools \
   && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
