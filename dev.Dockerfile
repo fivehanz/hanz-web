@@ -55,11 +55,3 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-CMD granian \
-  --interface wsgi hanz.wsgi:application \
-  --host 0.0.0.0 \
-  --port 8000 \
-  --workers 2 \
-  --threads 2 \
-  --reload

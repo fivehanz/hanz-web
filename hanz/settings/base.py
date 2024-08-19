@@ -18,8 +18,10 @@ from django.conf.global_settings import STORAGES
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-DEBUG: bool = os.environ.get("DEBUG", False) == "True"
-WAGTAIL_CACHE: bool = os.environ.get("WAGTAIL_CACHE", not DEBUG)
+DEBUG = os.environ.get("DEBUG", False)
+WAGTAIL_CACHE = os.environ.get("WAGTAIL_CACHE", not DEBUG)
+
+
 
 # Application definition
 
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
+    "django_celery_beat",
     "compressor",
     "crispy_forms",
     "crispy_tailwind",
@@ -258,3 +261,15 @@ WAGTAIL_AI = {
 # crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+# Celery
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://localhost:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get(
+    "CELERY_RESULT_BACKEND", "redis://localhost:6379/1"
+)
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
