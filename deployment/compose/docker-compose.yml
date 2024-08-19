@@ -20,9 +20,10 @@ services:
       - GID=${GID:-1000}
     env_file:
       - .env
-    command: "granian --interface wsgi hanz.wsgi:application --host 0.0.0.0 --port 8000 \
+    command:
+      "granian --interface wsgi hanz.wsgi:application --host 0.0.0.0 --port 8000 \
       --workers 2 --threads 2 --log-level info"
-  
+
   static_build:
     build:
       context: ../../
@@ -43,6 +44,42 @@ services:
       - .env
     volumes:
       - ../../static:/app/src/static/
+
+  celery_worker:
+    container_name: hanz_celery_worker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A hanz worker -l error
+    environment:
+      - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
+      - UID=${UID:-1000}
+      - GID=${GID:-1000}
+    env_file:
+      - .env
+    networks:
+      - hanz-nw
+    depends_on:
+      - db
+      - redis
+
+  celery_beat:
+    container_name: hanz_celery_beat
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A hanz beat -l error
+    environment:
+      - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
+      - UID=${UID:-1000}
+      - GID=${GID:-1000}
+    env_file:
+      - .env
+    networks:
+      - hanz-nw
+    depends_on:
+      - db
+      - redis
 
   db:
     image: postgres:15-alpine
@@ -65,7 +102,6 @@ services:
     restart: unless-stopped
     networks:
       - hanz-nw
-
 
 networks:
   hanz-nw:
