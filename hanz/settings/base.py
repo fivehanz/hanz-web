@@ -21,15 +21,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 DEBUG = os.environ.get("DEBUG", False)
 WAGTAIL_CACHE = os.environ.get("WAGTAIL_CACHE", not DEBUG)
 
-# wagtail frontend cache (cloudflare), invalidated on change
-WAGTAILFRONTENDCACHE = {
-    'cloudflare': {
-            'BACKEND': 'wagtail.contrib.frontend_cache.backends.CloudflareBackend',
-            'BEARER_TOKEN': os.environ.get("CLOUDFLARE_BEARER_TOKEN", ""),
-            'ZONEID': os.environ.get("CLOUDFLARE_ZONEID", ""),
-        },
-}
-
 # Application definition
 
 INSTALLED_APPS = [
