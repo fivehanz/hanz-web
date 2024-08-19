@@ -24,7 +24,7 @@ RUN apt-get update \
     postgresql-client \
     libpq-dev \
     inotify-tools \
-  && rm -rf /var/lib/apt/lists/* && apt-get clean
+    && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
@@ -36,6 +36,11 @@ RUN poetry install --no-dev && poetry add granian[reload] && poetry cache clear 
 ############################################################
 
 FROM python-base as development
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y --quiet \
+    postgresql-client-15 \
+    && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 WORKDIR $PYSETUP_PATH
 

@@ -35,6 +35,11 @@ RUN poetry install --no-dev && poetry add granian==1.5.2 && poetry cache clear .
 ############################################################
 FROM python-base AS production
 
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y --quiet \
+    postgresql-client-15 \
+    && rm -rf /var/lib/apt/lists/* && apt-get clean
+
 ENV GID=1000
 ENV UID=1000
 
