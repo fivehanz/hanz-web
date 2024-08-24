@@ -2056,13 +2056,13 @@ testing = ["coverage (>=7.4.0)", "dj-database-url (==2.1.0)", "django-types (>=0
 
 [[package]]
 name = "wagtail-cache"
-version = "2.5.0"
+version = "2.5.1"
 description = "A simple page cache for Wagtail based on the Django cache middleware."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "wagtail_cache-2.5.0-py3-none-any.whl", hash = "sha256:cceb80d342b9d4756585c85e375b7d78ddc84a0529ff3fb070b4d02d08a6b420"},
-    {file = "wagtail_cache-2.5.0.tar.gz", hash = "sha256:4bd4b7cbb9fcc438153d2b9ad07dd7e28207769d0436fce0934a7335bea72a21"},
+    {file = "wagtail_cache-2.5.1-py3-none-any.whl", hash = "sha256:1e8133f88d60bf7c6f97f6858e79d846394c70a22d82722e10c79c3d32d456ad"},
+    {file = "wagtail_cache-2.5.1.tar.gz", hash = "sha256:6344342dd0c383ec2eac80195d48aa61a4a1966992a12be23013342f9341c20d"},
 ]
 
 [package.dependencies]
