@@ -45,6 +45,10 @@
     {% compress js file htmx %}
       <script defer src="{% static 'js/htmx.min.js' %}"></script>
     {% endcompress %}
+
+    <!-- PLAUSIBLE ANALYTICS -->
+    {% load plausible_wagtail %}
+    {% plausible %}
   </head>
 
   <body class="bg-white dark:bg-gray-800 max-w-screen-xl mx-auto {% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
