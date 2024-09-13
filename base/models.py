@@ -47,23 +47,23 @@ class NavigationSettings(BaseGenericSetting):
     ]
 
 
-@register_setting
-class GoogleTagManagerSettings(BaseSiteSetting):
-    """ google tag manager id settings """
+# @register_setting
+# class GoogleTagManagerSettings(BaseSiteSetting):
+#     """ google tag manager id settings """
 
-    class Meta:
-        verbose_name = "Google Tag Manager"
+#     class Meta:
+#         verbose_name = "Google Tag Manager"
 
-    google_tag_manager_id = models.CharField(
-        verbose_name="Google Tag Manager ID",
-        max_length=255,
-        blank=True,
-        help_text='Begins with "GTM-"',
-    )
+#     google_tag_manager_id = models.CharField(
+#         verbose_name="Google Tag Manager ID",
+#         max_length=255,
+#         blank=True,
+#         help_text='Begins with "GTM-"',
+#     )
 
-    panels = [
-        FieldPanel("google_tag_manager_id"),
-    ]
+#     panels = [
+#         FieldPanel("google_tag_manager_id"),
+#     ]
 
 
 class FormField(AbstractFormField):
