@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.19.0](https://github.com/fivehanz/hanz-web/compare/v0.18.0...v0.19.0) (2024-09-14)
+
+
+### Features
+
+* add plausible analytics & rm GTM ([cb62bc8](https://github.com/fivehanz/hanz-web/commit/cb62bc8586221c56ffc0f0a7e804d9c524a2dfe7))
+* init celery worker, beat ([410cf3c](https://github.com/fivehanz/hanz-web/commit/410cf3c1764eff50838b25f30f31e3d5b103c43f))
+* schedule dbbackup using celery ([61645ba](https://github.com/fivehanz/hanz-web/commit/61645ba694a54f57046347594a6e9c6fabcac9e2))
+* working fonts family ([2d1a8be](https://github.com/fivehanz/hanz-web/commit/2d1a8be348a37dd11a94b95ef2d43ef10b0a6b34))
+
+
+### Bug Fixes
+
+* **500 IS ERROR:** CF frontend cache invalidator ([c375c66](https://github.com/fivehanz/hanz-web/commit/c375c66cee2e5b03b55ace5590e809c473945a9b))
+* default auto field ([b05e449](https://github.com/fivehanz/hanz-web/commit/b05e449f887ff85895fd71f9356dfffd6fb0ec3a))
+* plausible analytics load on page ([8e1432f](https://github.com/fivehanz/hanz-web/commit/8e1432f4c9095d9325633d33c9a1ecbfaea6fb32))
+* prod dockerfile path ([bca044b](https://github.com/fivehanz/hanz-web/commit/bca044b962bc90634f7f59305ea6810f95a73d41))
+* rm db nw, add celery depend on web, rm bridge ([75c53c9](https://github.com/fivehanz/hanz-web/commit/75c53c903badc4a72cac2c473b14b8043b4ec900))
+* rm duplicate cf config ([5a757dc](https://github.com/fivehanz/hanz-web/commit/5a757dca8f7b806cbc58a1603db4a8b6ffcaaa37))
+* rm duplicate config cloudflare cache ([5f7baeb](https://github.com/fivehanz/hanz-web/commit/5f7baeb3f30ebc26f1ca7d4a2ed2e1fc44347b01))
+
 ## [0.18.0](https://github.com/fivehanz/hanz-web/compare/v0.17.0...v0.18.0) (2024-08-04)
 
 
