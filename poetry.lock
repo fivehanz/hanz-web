@@ -646,23 +646,6 @@ Django = "*"
 testing = ["django-modelcluster"]
 
 [[package]]
-name = "django-plausible"
-version = "0.5.0"
-description = "Django module to provide easy Plausible integration, with Wagtail support"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django-plausible-0.5.0.tar.gz", hash = "sha256:c6fbeb1200a86f63cbe83f07e665202a29edeb6b46eb78b393372fb37b945330"},
-    {file = "django_plausible-0.5.0-py3-none-any.whl", hash = "sha256:d132371bafcf2b65afead0ac2eb65cf52d2e6260b22c2999c3a58d1fe60ca9b1"},
-]
-
-[package.dependencies]
-Django = ">=3.2"
-
-[package.extras]
-wagtail = ["wagtail (>=4.0)"]
-
-[[package]]
 name = "django-storages"
 version = "1.14"
 description = "Support for many storage backends in Django"
@@ -2019,13 +2002,13 @@ files = [
 
 [[package]]
 name = "wagtail"
-version = "6.2"
+version = "6.2.2"
 description = "A Django content management system."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "wagtail-6.2-py3-none-any.whl", hash = "sha256:9898b3f3a25fbf4cbcea34a8884b4aed7bc957b3877a3e1bd994e072452f5fae"},
-    {file = "wagtail-6.2.tar.gz", hash = "sha256:59086e8ca181b10f274b113924500504ded6fc16824c1976f37c3cbddd100d24"},
+    {file = "wagtail-6.2.2-py3-none-any.whl", hash = "sha256:d0382603aef5d7e4a46529aa125857774a317c2870c9b6836767932969829429"},
+    {file = "wagtail-6.2.2.tar.gz", hash = "sha256:506ac2b59dae85069ae754b45bc13b91cbd86e92d4f5d663658773b0ed7a16b9"},
 ]
 
 [package.dependencies]
@@ -2156,4 +2139,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "96f705c2628aa2cbaa4dae0bfb1614397d3ed85d1f566d2b7abd716ca60c4d99"
+content-hash = "0517f0c37dc83a14a1ff3804fba4633f35db4af5353498dd464bd341e8b14f5f"
