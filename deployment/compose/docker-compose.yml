@@ -10,12 +10,11 @@ services:
     networks:
       - hanz-nw
     depends_on:
-      - db
       - redis
     environment:
-      - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
       - REDIS_URL=redis://redis:6379/1
       - RUN_MIGRATION=true
+      - COLLECT_STATIC=true
       - UID=${UID:-1000}
       - GID=${GID:-1000}
     env_file:
@@ -24,26 +23,26 @@ services:
       "granian --interface wsgi hanz.wsgi:application \
        --host 0.0.0.0 --port 8000 --workers 3 --log-level info"
 
-  static_build:
-    build:
-      context: ../../
-      dockerfile: Dockerfile
-    container_name: hanz_prod_static_build
-    networks:
-      - hanz-nw
-    depends_on:
-      - db
-      - redis
-    environment:
-      - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
-      - REDIS_URL=redis://redis:6379/1
-      - COLLECT_STATIC=true
-      - UID=${UID:-1000}
-      - GID=${GID:-1000}
-    env_file:
-      - .env
-    volumes:
-      - ../../static:/app/src/static/
+  # static_build:
+  #   build:
+  #     context: ../../
+  #     dockerfile: Dockerfile
+  #   container_name: hanz_prod_static_build
+  #   networks:
+  #     - hanz-nw
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   environment:
+  #     - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
+  #     - REDIS_URL=redis://redis:6379/1
+  #     - COLLECT_STATIC=true
+  #     - UID=${UID:-1000}
+  #     - GID=${GID:-1000}
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ../../static:/app/src/static/
 
   celery_worker:
     container_name: hanz_celery_worker
@@ -52,7 +51,6 @@ services:
       dockerfile: Dockerfile
     command: celery -A hanz worker -l error
     environment:
-      - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
       - UID=${UID:-1000}
       - GID=${GID:-1000}
     env_file:
@@ -61,7 +59,6 @@ services:
       - hanz-nw
     depends_on:
       - web
-      - db
       - redis
 
   celery_beat:
@@ -71,7 +68,6 @@ services:
       dockerfile: Dockerfile
     command: celery -A hanz beat -l error
     environment:
-      - DATABASE_URL=postgres://user:dbpassword@db:5432/hanz-db
       - UID=${UID:-1000}
       - GID=${GID:-1000}
     env_file:
@@ -80,22 +76,21 @@ services:
       - hanz-nw
     depends_on:
       - web
-      - db
       - redis
 
-  db:
-    image: postgres:15-alpine
-    container_name: hanz_prod_postgres_db
-    restart: unless-stopped
-    networks:
-      - hanz-nw
-    volumes:
-      - /opt/databases/prod/hanz-web/postgresql/db:/var/lib/postgresql/db
-    environment:
-      - POSTGRES_DB=hanz-db
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=dbpassword
-      - PGDATA=/var/lib/postgresql/db
+  # db:
+  #   image: postgres:15-alpine
+  #   container_name: hanz_prod_postgres_db
+  #   restart: unless-stopped
+  #   networks:
+  #     - hanz-nw
+  #   volumes:
+  #     - /opt/databases/prod/hanz-web/postgresql/db:/var/lib/postgresql/db
+  #   environment:
+  #     - POSTGRES_DB=hanz-db
+  #     - POSTGRES_USER=user
+  #     - POSTGRES_PASSWORD=dbpassword
+  #     - PGDATA=/var/lib/postgresql/db
 
   redis:
     image: redis:7-alpine
