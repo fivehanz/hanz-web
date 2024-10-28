@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  web:
+    image: haniel56/hanz-web:9dcb80e
+    restart: unless-stopped
+    ports:
+      - "58181:8000"
+    networks:
+      - hanz-nw
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://hanz_redis:6379/1
+      - RUN_MIGRATION=true
+      - COLLECT_STATIC=true
+      # - UID=${UID:-1000}
+      # - GID=${GID:-1000}
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+    env_file:
+      - .env
+    command: "granian --interface wsgi hanz.wsgi:application \
+              --host 0.0.0.0 --port 8000 --workers 3 --log-level info"
+
+  celery_worker:
+    image: haniel56/hanz-web:9dcb80e
+    command: celery -A hanz worker -l error
+    # environment:
+    #   - UID=${UID:-1000}
+    #   - GID=${GID:-1000}
+    env_file:
+      - .env
+    networks:
+      - hanz-nw
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+    depends_on:
+      - web
+      - redis
+
+  celery_beat:
+    image: haniel56/hanz-web:9dcb80e
+    command: celery -A hanz beat -l error
+    # environment:
+    #   - UID=${UID:-1000}
+    #   - GID=${GID:-1000}
+    env_file:
+      - .env
+    networks:
+      - hanz-nw
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    depends_on:
+      - web
+      - redis
+
+  hanz_redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - hanz-nw
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+
+networks:
+  hanz-nw:
+    driver: overlay
