@@ -128,6 +128,18 @@ DBBACKUP_STORAGE_OPTIONS = {
     "default_acl": "private",
 }
 
+DBBACKUP_CONNECTOR_MAPPING = {
+    'django.db.backends.postgresql': 'dbbackup.db.postgresql.PgDumpBinaryConnector',
+}
+
+DBBACKUP_CONNECTORS = {
+    'default': {
+        'dump_cmd': 'pg_dump --no-owner --no-privileges',
+        'restore_cmd': 'pg_restore --no-owner --no-privileges',
+    }
+}
+
+###
 AWS_S3_ADDRESSING_STYLE = os.environ.get("S3_ADDRESSING_STYLE", "path")
 # AWS_S3_SIGNATURE_VERSION = "s3v4"
 
