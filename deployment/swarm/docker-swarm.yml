@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: haniel56/hanz-web:9dcb80e
+    image: haniel56/hanz-web:083264e
     restart: unless-stopped
     ports:
       - "58181:8000"
@@ -26,7 +26,7 @@ services:
               --host 0.0.0.0 --port 8000 --workers 3 --log-level info"
 
   celery_worker:
-    image: haniel56/hanz-web:9dcb80e
+    image: haniel56/hanz-web:083264e
     command: celery -A hanz worker -l error
     # environment:
     #   - UID=${UID:-1000}
@@ -44,7 +44,7 @@ services:
       - redis
 
   celery_beat:
-    image: haniel56/hanz-web:9dcb80e
+    image: haniel56/hanz-web:083264e
     command: celery -A hanz beat -l error
     # environment:
     #   - UID=${UID:-1000}
