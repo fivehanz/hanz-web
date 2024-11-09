@@ -1,96 +1,109 @@
 {% load compress static wagtailcore_tags %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="{% block html_class %}{% endblock %}">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
-    {% include "wagtailseo/meta.html" %}
+        <!-- UI Kit -->
+        {% compress css file uikit %}
+        <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}">
+        {% endcompress %}
 
-    {# Force all links in the live preview panel to be opened in a new tab #}
-    {% if request.in_preview_panel %}
-    <base target="_blank">
-    {% endif %}
+        <!-- SEO -->
+        {% include "wagtailseo/meta.html" %}
 
-    <title>
-      {% block title %}
-      {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-      {% endblock %}
-      {% block title_suffix %}
-      {% wagtail_site as current_site %}
-      {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-      {% endblock %}
-    </title>
+        <!-- Force all links in the live preview panel to be opened in a new tab -->
+        {% if request.in_preview_panel %}
+            <base target="_blank" />
+        {% endif %}
+        <!-- /preview panel -->
 
-    {% if page.search_description %}
-    <meta name="description" content="{{ page.search_description }}" />
-    {% endif %}
+        <title>
+        {# fmt:off #}
+            {% block title %}
+                {% if page.seo_title %}
+                    {{ page.seo_title }}
+                {% else %}
+                    {{ page.title }}
+                {% endif %}
+            {% endblock %}
 
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'favicon.ico' %}">
+            {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %}- {{current_site.site_name }}{% endif %}
+            {% endblock %}
+        {# fmt:on #}
+        </title>
 
-    <!-- Tailwind -->
-    {% compress css file tailwind %}
-      <link rel="stylesheet" href="{% static 'css/output.css' %}">
-    {% endcompress %}
+        {% if page.search_description %}
+            <meta name="description" content="{{ page.search_description }}" />
+        {% endif %}
 
-    {% block extra_css %}
-      {# Override this in templates to add extra stylesheets #}
-    {% endblock %}
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'favicon.ico' %}" />
 
-    <!-- HTMX -->
-    {% compress js file htmx %}
-      <script defer src="{% static 'js/htmx.min.js' %}"></script>
-    {% endcompress %}
+        <!-- Tailwind -->
+        <!-- {% compress css file tailwind %} -->
+        <!-- <link rel="stylesheet" href="{% static 'css/output.css' %}"> -->
+        <!-- {% endcompress %} -->
 
-    <!-- PLAUSIBLE ANALYTICS -->
-    {% load plausible_wagtail %}
-    {% plausible %}
-  </head>
+        {% block extra_css %}
+        <!-- Override this in templates to add extra stylesheets -->
+        {% endblock %}
 
-  <body class="bg-white dark:bg-gray-800 max-w-screen-xl mx-auto {% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
-    <!-- navbar / header -->
-    {% include "includes/header.html" %}
-    <!-- end navbar / header -->
+        <!-- HTMX -->
+        <!-- {% compress js file htmx %} -->
+        <!-- <script defer src="{% static 'js/htmx.min.js' %}"></script> -->
+        <!-- {% endcompress %} -->
 
-    <!-- main content -->
-    <main id="main" class="px-4 mt-4 mx-auto lg:px-6">
-      <div class="prose format lg:format-lg dark:format-invert max-w-full">
-        <!--main content block-->
-        {% block content %} {% endblock content %}
-      </div>
-    </main>
+        <!-- PLAUSIBLE ANALYTICS -->
+        {% load plausible_wagtail %} {% plausible %}
+    </head>
 
-    <!-- footer -->
-    {% include "includes/footer.html" %}
-    <!-- end footer -->
+    <body
+        class="uk-container {% block body_class %}{% endblock %}"
+        {% block body_attributes %}{% endblock%}
+    >
+        <!-- navbar / header -->
+        {% include "includes/header.html" %}
+        <!-- end navbar / header -->
 
-    <!-- Flowbite -->
-    {% compress js file flowbite %}
-    <script defer src="{% static 'js/flowbite.min.js' %}"></script>
-    {% endcompress %}
+        <!-- main content -->
+        <main id="main" class="uk-container">
+            <!--main content block-->
+            {% block content %} {% endblock content %}
+        </main>
 
-    <!-- Alpinejs 3.13.3 -->
-    {% compress js file alpine %}
-    <script defer src="{% static 'js/alpine.min.js' %}"></script>
-    {% endcompress %}
+        <!-- footer -->
+        {% include "includes/footer.html" %}
+        <!-- end footer -->
 
-    {% compress js inline %}
-    <!-- <script> -->
-    <!--   htmx.onLoad(function(content) { -->
-    <!--     initFlowbite(); -->
-    <!--   }) -->
-    </script>
-    {% endcompress %}
+        <!-- UI Kit 3.21.13 -->
+        {% compress js file uikit %}
+        <script defer src="{% static 'js/uikit.min.js' %}"></script>
+        {% endcompress %}
 
-    {% block extra_js %}
-      {# Override this in templates to add extra javascript #}
-    {% endblock %}
+        <!-- Alpine.js 3.13.3 -->
+        {% compress js file alpine %}
+        <script defer src="{% static 'js/alpine.min.js' %}"></script>
+        {% endcompress %}
 
-    <!-- SEO -->
-    {% include "wagtailseo/struct_data.html" %}
-  </body>
+        {% compress js inline %}
+        <!-- <script> -->
+        <!--   htmx.onLoad(function(content) { -->
+        <!--     initFlowbite(); -->
+        <!--   }) -->
+        <!-- </script> -->
+        {% endcompress %}
+
+        {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+        <!-- SEO -->
+        {% include "wagtailseo/struct_data.html" %}
+    </body>
 </html>

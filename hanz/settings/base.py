@@ -195,6 +195,7 @@ STATICFILES_FINDERS = [
 ]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "node_modules/uikit/dist")
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
