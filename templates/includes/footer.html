@@ -1,10 +1,12 @@
-<footer class="p-4 bg-white sm:p-6 dark:bg-gray-800">
-    <div class="mx-auto max-w-screen-xl">  
+<footer class="uk-container p-4 bg-white sm:p-6 dark:bg-gray-800">
+    <div class="mx-auto max-w-screen-xl">
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div class="flex items-baseline justify-between">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                 © {% now "Y" %} hanz.
             </span>
+
+
             <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
             {% with twitter_url=settings.base.NavigationSettings.twitter_url github_url=settings.base.NavigationSettings.github_url linkedin_url=settings.base.NavigationSettings.linkedin_url %}
                 {% if twitter_url or github_url or mastodon_url %}

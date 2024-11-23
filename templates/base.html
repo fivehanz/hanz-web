@@ -3,14 +3,14 @@
 <!doctype html>
 <html lang="en" class="{% block html_class %}{% endblock %}">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <!-- UI Kit -->
         {% compress css file uikit %}
         <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}">
         {% endcompress %}
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- SEO -->
         {% include "wagtailseo/meta.html" %}
@@ -45,26 +45,16 @@
         <!-- Favicon -->
         <link rel="icon" href="{% static 'favicon.ico' %}" />
 
-        <!-- Tailwind -->
-        <!-- {% compress css file tailwind %} -->
-        <!-- <link rel="stylesheet" href="{% static 'css/output.css' %}"> -->
-        <!-- {% endcompress %} -->
-
         {% block extra_css %}
         <!-- Override this in templates to add extra stylesheets -->
         {% endblock %}
-
-        <!-- HTMX -->
-        <!-- {% compress js file htmx %} -->
-        <!-- <script defer src="{% static 'js/htmx.min.js' %}"></script> -->
-        <!-- {% endcompress %} -->
 
         <!-- PLAUSIBLE ANALYTICS -->
         {% load plausible_wagtail %} {% plausible %}
     </head>
 
     <body
-        class="uk-container {% block body_class %}{% endblock %}"
+        class="{% block body_class %}{% endblock %}"
         {% block body_attributes %}{% endblock%}
     >
         <!-- navbar / header -->
@@ -89,14 +79,6 @@
         <!-- Alpine.js 3.13.3 -->
         {% compress js file alpine %}
         <script defer src="{% static 'js/alpine.min.js' %}"></script>
-        {% endcompress %}
-
-        {% compress js inline %}
-        <!-- <script> -->
-        <!--   htmx.onLoad(function(content) { -->
-        <!--     initFlowbite(); -->
-        <!--   }) -->
-        <!-- </script> -->
         {% endcompress %}
 
         {% block extra_js %}
