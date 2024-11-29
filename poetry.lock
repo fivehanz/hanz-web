@@ -2201,13 +2201,13 @@ testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-f
 
 [[package]]
 name = "wagtail-ai"
-version = "2.1.1"
+version = "2.1.2"
 description = "Get a hand writing your content with AI super powers!"
 optional = false
 python-versions = ">=3.11"
 files = [
-    {file = "wagtail_ai-2.1.1-py3-none-any.whl", hash = "sha256:d1739f4bc1ee354f86824b2e1fc73012cfaf672a6eef0e473385c708c03a6589"},
-    {file = "wagtail_ai-2.1.1.tar.gz", hash = "sha256:66d1e1f61ce43dd1df9536e08b74791923ac3e8f71e214e8d3d15636f3997344"},
+    {file = "wagtail_ai-2.1.2-py3-none-any.whl", hash = "sha256:8e76272a33415fd4223e837fd71062cfe6da6286d9e96475e2452611365395ef"},
+    {file = "wagtail_ai-2.1.2.tar.gz", hash = "sha256:0ef4300790f30fd4bf3c7bc958d991554e88ea2cfa92b53d381dbeb76e122fc5"},
 ]
 
 [package.dependencies]
