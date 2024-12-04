@@ -4,7 +4,7 @@ GIT_TAG = ${shell git tag | tail -1}
 build: build-tailwindcss build-statics
 deps: bun-install python-install
 # build-docker: build-docker-image
-dev: dev-tailwindcss dev-docker-start
+dev: dev-start
 migrate: migrate-django
 prod: prod-release
 
