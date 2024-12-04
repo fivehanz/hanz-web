@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: haniel56/hanz-web:054e5c3
+    image: haniel56/hanz-web:${IMAGE_SHA:-latest}
     restart: unless-stopped
     ports:
       - "58181:8000"
@@ -17,7 +17,16 @@ services:
       # - UID=${UID:-1000}
       # - GID=${GID:-1000}
     deploy:
-      replicas: 2
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 60s
+        order: start-first
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
       restart_policy:
         condition: any
     env_file:
@@ -26,7 +35,7 @@ services:
               --host 0.0.0.0 --port 8000 --workers 3 --log-level info"
 
   celery_worker:
-    image: haniel56/hanz-web:054e5c3
+    image: haniel56/hanz-web:${IMAGE_SHA:-latest}
     command: celery -A hanz worker -l error
     # environment:
     #   - UID=${UID:-1000}
@@ -36,7 +45,16 @@ services:
     networks:
       - hanz-nw
     deploy:
-      replicas: 2
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 20s
+        order: start-first
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
       restart_policy:
         condition: any
     depends_on:
@@ -44,7 +62,7 @@ services:
       - redis
 
   celery_beat:
-    image: haniel56/hanz-web:054e5c3
+    image: haniel56/hanz-web:${IMAGE_SHA:-latest}
     command: celery -A hanz beat -l error
     # environment:
     #   - UID=${UID:-1000}
@@ -55,6 +73,15 @@ services:
       - hanz-nw
     deploy:
       replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 20s
+        order: start-first
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
       restart_policy:
         condition: any
     depends_on:
@@ -68,6 +95,15 @@ services:
       - hanz-nw
     deploy:
       replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 20s
+        order: start-first
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
       restart_policy:
         condition: any
 
