@@ -14,6 +14,15 @@ ENV PYTHONUNBUFFERED=1 \
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 ############################################################
+FROM oven/bun:1-slim AS frontend-builder
+WORKDIR /app
+
+COPY package.json ./
+COPY bun.lockb ./
+
+RUN bun --bun install --frozen-lockfile
+
+############################################################
 FROM python-base AS builder-base
 
 RUN apt-get update \
@@ -51,6 +60,9 @@ COPY --from=builder-base $POETRY_HOME $POETRY_HOME
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 
 WORKDIR /app/src
+
+# copy frontend assets
+COPY --from=frontend-builder /app/node_modules/uikit/dist /app/src/assets
 
 # Copy the source code into the container
 COPY . /app/src/
