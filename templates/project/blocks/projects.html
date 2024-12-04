@@ -6,36 +6,38 @@
 
     <div class="uk-flex uk-flex-row uk-flex-wrap">
         {% if self.featured %} {% for card in self.featured %}
-        <div
-            class="uk-card-small uk-card-default uk-card-body uk-card-hover uk-width-expand@l uk-width-1-2@l"
-        >
-            {% if card.page %}
-            <a
-                href="{% pageurl card.page %}"
-                class="uk-card-title"
+        <div class="uk-padding-small uk-width-expand@m uk-width-1-2@m">
+            <div
+                class="uk-card-small uk-card-default uk-card-body uk-card-hover"
             >
-                {{ card.heading }}
-            </a>
-            {% else %}
-            <h3
-                class="uk-card-title"
-            >
-                {{ card.heading }}
-            </h3>
-            {% endif %} {% if card.text %} {{ card.text|richtext }} {% endif %}
-            {% if card.links %}
-            <div class="uk-flex uk-flex-column uk-flex-wrap">
-                {% for link in card.links %}
+                {% if card.page %}
                 <a
-                    class="inline-flex items-baseline text-primary-600"
-                    target="_blank"
-                    href="{{ link.url }}"
+                    href="{% pageurl card.page %}"
+                    class="uk-card-title"
                 >
-                    {{ link.name }}
+                    {{ card.heading }}
                 </a>
-                {% endfor %}
+                {% else %}
+                <h3
+                    class="uk-card-title"
+                >
+                    {{ card.heading }}
+                </h3>
+                {% endif %} {% if card.text %} {{ card.text|richtext }} {% endif %}
+                {% if card.links %}
+                <div class="uk-flex uk-flex-column uk-flex-wrap">
+                    {% for link in card.links %}
+                    <a
+                        class="inline-flex items-baseline text-primary-600"
+                        target="_blank"
+                        href="{{ link.url }}"
+                    >
+                        {{ link.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
         {% endfor %} {% endif %}
     </div>
