@@ -494,13 +494,13 @@ typing_extensions = ">=3.10.0.0"
 
 [[package]]
 name = "django"
-version = "5.1.2"
+version = "5.1.4"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.1.2-py3-none-any.whl", hash = "sha256:f11aa87ad8d5617171e3f77e1d5d16f004b79a2cf5d2e1d2b97a6a1f8e9ba5ed"},
-    {file = "Django-5.1.2.tar.gz", hash = "sha256:bd7376f90c99f96b643722eee676498706c9fd7dc759f55ebfaf2c08ebcdf4f0"},
+    {file = "Django-5.1.4-py3-none-any.whl", hash = "sha256:236e023f021f5ce7dee5779de7b286565fdea5f4ab86bae5338e3f7b69896cf0"},
+    {file = "Django-5.1.4.tar.gz", hash = "sha256:de450c09e91879fa5a307f696e57c851955c910a438a35e6b4c895e86bedc82a"},
 ]
 
 [package.dependencies]
@@ -745,20 +745,6 @@ files = [
 Django = ">=3.2"
 
 [[package]]
-name = "django-types"
-version = "0.19.1"
-description = "Type stubs for Django"
-optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "django_types-0.19.1-py3-none-any.whl", hash = "sha256:b3f529de17f6374d41ca67232aa01330c531bbbaa3ac4097896f31ac33c96c30"},
-    {file = "django_types-0.19.1.tar.gz", hash = "sha256:5ae7988612cf6fbc357b018bbc3b3a878b65e04275cc46e0d35d66a708daff12"},
-]
-
-[package.dependencies]
-types-psycopg2 = ">=2.9.21.13"
-
-[[package]]
 name = "djangorestframework"
 version = "3.15.2"
 description = "Web APIs for Django, made easy."
@@ -771,19 +757,6 @@ files = [
 
 [package.dependencies]
 django = ">=4.2"
-
-[[package]]
-name = "djhtml"
-version = "3.0.7"
-description = "Django/Jinja template indenter"
-optional = false
-python-versions = "*"
-files = [
-    {file = "djhtml-3.0.7.tar.gz", hash = "sha256:558c905b092a0c8afcbed27dea2f50aa6eb853a658b309e4e0f2bb378bdf6178"},
-]
-
-[package.extras]
-dev = ["nox", "pre-commit"]
 
 [[package]]
 name = "draftjs-exporter"
@@ -2105,17 +2078,6 @@ slack = ["slack-sdk"]
 telegram = ["requests"]
 
 [[package]]
-name = "types-psycopg2"
-version = "2.9.21.20241019"
-description = "Typing stubs for psycopg2"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "types-psycopg2-2.9.21.20241019.tar.gz", hash = "sha256:bca89b988d2ebd19bcd08b177d22a877ea8b841decb10ed130afcf39404612fa"},
-    {file = "types_psycopg2-2.9.21.20241019-py3-none-any.whl", hash = "sha256:44d091e67732d16a941baae48cd7b53bf91911bc36888652447cf1ef0c1fb3f6"},
-]
-
-[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -2318,4 +2280,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "660b4200665c5838fc12df1ca3bf460fba7ff7726d5b083305ea40f676e6d5ab"
+content-hash = "0ec8d625f742feafe8c4da7492a485715f2c3e9c96ef0a14dcc0aabfb6aa65c1"
