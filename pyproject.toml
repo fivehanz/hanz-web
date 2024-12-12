@@ -28,7 +28,7 @@ django-celery-beat = "^2.6.0"
 django-plausible = "^0.5.0"
 whitenoise = "^6.7.0"
 djhtml = "^3.0.7"
-django-types = "^0.19.1"
+django-types = "^0.20.0"
 
 
 [tool.poetry.group.dev.dependencies]
