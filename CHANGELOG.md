@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.20.0](https://github.com/fivehanz/hanz-web/compare/v0.19.0...v0.20.0) (2024-12-26)
+
+
+### Features
+
+* docker swarm for prod ([ef36507](https://github.com/fivehanz/hanz-web/commit/ef36507f79bf44d9cefa683a8e9627db0bc3c0f8))
+* dockerimage w/ bun for uikit dist ([401a955](https://github.com/fivehanz/hanz-web/commit/401a95514d3e5cb9b11f51e1d9b8be882c4dc396))
+* nginx uses proxy protocol ([5d04bcf](https://github.com/fivehanz/hanz-web/commit/5d04bcf117f4990c73ef98edffb4e2c3e9be0883))
+* uikit 3.21.13; rm tailwind ([f5efd71](https://github.com/fivehanz/hanz-web/commit/f5efd71199f290683d4f3ac9f55da3ec96ce7d21))
+* upgrade django to 5.1, wagtail to 6.3 ([083264e](https://github.com/fivehanz/hanz-web/commit/083264e92d11e0046cac87abc7edd16956dedce4))
+* whitenoise for statics, compose refactor ([9dcb80e](https://github.com/fivehanz/hanz-web/commit/9dcb80ebcc0c9480523cf2262000813faf9a6fef))
+
+
+### Bug Fixes
+
+* alignments with uikit, projects, navbar ([0e070dc](https://github.com/fivehanz/hanz-web/commit/0e070dc7e615e6b76dae5572d790d00f3bbc1bb0))
+* dbrestore pg_restore w/ permissions ([054e5c3](https://github.com/fivehanz/hanz-web/commit/054e5c39b45d9b9db6c3906c5dc3b86022ed1ccb))
+* projects card w/ margin and padding ([8705536](https://github.com/fivehanz/hanz-web/commit/8705536d98a3e8454eca9dd9ed64963d231ea893))
+
 ## [0.19.0](https://github.com/fivehanz/hanz-web/compare/v0.18.0...v0.19.0) (2024-09-14)
 
 
