@@ -20,7 +20,7 @@ crispy-tailwind = "*"
 wagtail-cache = "<3,>=2.5"
 redis = {extras = ["hiredis"], version = "*"}
 django-dbbackup = "<5,>=4.1"
-django-storages = {extras = ["boto3"], version = "==1.14"}
+django-storages = {extras = ["boto3"], version = "==1.14.5"}
 django-anymail = "<12,>=11.0"
 wagtail-storages = "<2,>=1.1"
 celery = "^5.4.0"
